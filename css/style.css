@@ -6,3 +6,32 @@
 body{
   font-family: 'Archivo Narrow', sans-serif;
 }
+
+.search-tool{
+  border-radius: 8px;
+  border: solid 3px #df0000;
+
+}
+
+header{
+  background: #df0000;
+  margin-top: 0;
+}
+
+h1{
+  color: #fff;
+  padding: 8px;
+  font-family: 'Shrikhand', cursive;
+  font-size: 2rem;
+  text-shadow: 3px 4px #000; 
+  margin-top: 0; 
+
+}
+
+#input-area{
+  padding: 8px 2%;
+}
+
+img{
+  width: 75px;
+}
