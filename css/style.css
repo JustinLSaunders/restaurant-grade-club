@@ -1,0 +1,8 @@
+#cert-a, #cert-b, #cert-c, #cert-pending{
+  display: none;
+  margin: 10px auto;
+}
+
+body{
+  font-family: 'Archivo Narrow', sans-serif;
+}

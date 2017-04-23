@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+  <title>RestaurantGradeClub</title>
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <link rel="stylesheet" type="text/css" href="./css/simple-grid.css">
+  <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow:400,400i,700,700i&amp;subset=latin-ext" rel="stylesheet">
+</head>
+<body>
+
+  <div>
+
+    <div class="search tool">
+
+      <header>
+        <h1>Should I Eat Here?</h1>
+      </header>
+
+      <section id="input-area">
+
+        <input type="text" placeholder="restaurant name">
+
+        <select id="boro">
+          <option value="MANHATTAN">Manhattan</option>
+          <option value="BROOKLYN">Brooklyn</option>
+          <option value="QUEENS">Queens</option>
+          <option value="BRONX">The Bronx</option>
+          <option value="STATEN ISLAND">Staten Island</option>
+        </select>
+
+        <button id="search">Search</button>
+
+        <div class="results-container">
+          <div id="dba-container">
+
+            <span id="dba-name"></span>
+          </div>
+
+          <div id="certificate-display">
+
+            <img class="certificate">
+          </div>
+
+          <div id="violations-display">
+
+            <span id="violations"></span>
+          </div>
+        </div>
+      </section>
+
+      <footer></footer>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
+  <script type="text/javascript" src="./js/project.js"></script>
+</body>
+</html>
