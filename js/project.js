@@ -22,7 +22,7 @@ $("button").on("click", function() {
 
     $("span#violations").text(dateSorted[lastSortedIndex]["violation_description"]);
 
-    // $("img.certificate").attr("src", "./img/" + dateSorted[lastSortedIndex]["grade"] + ".png");
+    $("img.certificate").attr("src", "./img/" + dateSorted[lastSortedIndex]["grade"] + ".png");
 
     $("img.certificate").attr("alt", "NYC Sanitation Grade " + dateSorted[lastSortedIndex]["grade"]);
   });
