@@ -22,10 +22,10 @@ h1{
   color: #fff;
   padding: 8px;
   font-family: 'Shrikhand', cursive;
-  font-size: 2rem;
-  text-shadow: 3px 4px #000; 
-  margin-top: 0; 
-
+  font-weight: 400;
+  font-size: 4rem;
+  text-shadow: 3px 3px #000;
+  margin-top: 0;
 }
 
 #input-area{
@@ -33,5 +33,19 @@ h1{
 }
 
 img{
-  width: 75px;
+  width: 100%;
+}
+
+#certificate-display, #violations-display{
+  display: inline-block;
+  margin: 8px 2%;
+  vertical-align: top;
+}
+
+div#certificate-display{
+  width: 10%;
+}
+
+div#violations-display{
+  width: 80%;
 }
