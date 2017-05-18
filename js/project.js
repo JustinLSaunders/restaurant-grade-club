@@ -2,7 +2,7 @@ $("button").on("click", function() {
   var userInput = $("input").val();
   var userBoro = $("#boro").val();
 
-  $.getJSON("https://data.cityofnewyork.us/resource/xx67-kt59.json?$q=" + userInput + "&boro=" + userBoro, function(data) {
+  $.getJSON("https://data.cityofnewyork.us/resource/9w7m-hzhe.json?$q=" + userInput + "&boro=" + userBoro, function(data) {
 
     var withGrades = _.filter(data, function(restaurant) {
       return restaurant["grade"];
