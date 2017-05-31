@@ -10,7 +10,7 @@ body{
 .search-tool{
   border-radius: 8px;
   border: solid 3px #df0000;
-
+  margin: 20px 0 0 0;
 }
 
 header{
@@ -30,6 +30,11 @@ h1{
 
 #input-area{
   padding: 8px 2%;
+}
+
+select, input{
+  height: 25px;
+  padding: 1px 0;
 }
 
 img{
