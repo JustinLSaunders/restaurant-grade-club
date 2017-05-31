@@ -1,3 +1,9 @@
+function replaceDegrees() {
+  var str = document.getElementById("violations").innerHTML; 
+  var res = str.replace("Âº", "°");
+  document.getElementById("violations").innerHTML = res;
+};
+
 $("button").on("click", function() {
   var userInput = $("input").val();
   var userBoro = $("#boro").val();
@@ -25,5 +31,8 @@ $("button").on("click", function() {
     $("img.certificate").attr("src", "./img/" + dateSorted[lastSortedIndex]["grade"] + ".png");
 
     $("img.certificate").attr("alt", "NYC Sanitation Grade " + dateSorted[lastSortedIndex]["grade"]);
+
+    replaceDegrees();
+
   });
 });
