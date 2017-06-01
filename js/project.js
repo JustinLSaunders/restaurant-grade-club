@@ -1,7 +1,7 @@
-function replaceDegrees() {
-  var str = document.getElementById("violations").innerHTML; 
-  var res = str.replace("Âº", "°");
-  document.getElementById("violations").innerHTML = res;
+function replaceText(open, replacement, span) {
+  var str = document.getElementById(span).innerHTML; 
+  var res = str.replace(open, replacement);
+  document.getElementById(span).innerHTML = res;
 };
 
 $("button").on("click", function() {
@@ -32,7 +32,10 @@ $("button").on("click", function() {
 
     $("img.certificate").attr("alt", "NYC Sanitation Grade " + dateSorted[lastSortedIndex]["grade"]);
 
-    replaceDegrees();
+    window.onload = replaceText("Âº", "°", "violations");
+    window.onload = replaceText("", "'", "violations");
+    // document.createElement(“tagtype”)
+    // document.createTextNode(“this is my text content”) 
 
   });
 });
