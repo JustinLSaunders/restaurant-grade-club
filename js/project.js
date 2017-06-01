@@ -33,6 +33,7 @@ $("button").on("click", function() {
     $("img.certificate").attr("alt", "NYC Sanitation Grade " + dateSorted[lastSortedIndex]["grade"]);
 
     window.onload = replaceText("Âº", "°", "violations");
+    window.onload = replaceText(" Âº", "° ", "violations");
     window.onload = replaceText("", "'", "violations");
     // document.createElement(“tagtype”)
     // document.createTextNode(“this is my text content”) 
