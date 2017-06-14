@@ -32,29 +32,33 @@ $("button").on("click", function() {
   newItems(certContainer, "img", "certificate");
   newItems(violationsContainer, "ul", "violations-list")
 
-  $.getJSON("https://data.cityofnewyork.us/resource/xx67-kt59.json?$q=" + userInput + "&boro=" + userBoro, function(data) {
+  // https://data.cityofnewyork.us/resource/xx67-kt59.json?$q" + userInput + "&boro=" + userBoro + "&$where=grade%20IS%20NOT%20NULL%20&$limit=5&$offset=20" //Consider how to use this for pagination (JS 20170614)
 
-    var withGrades = _.filter(data, function(restaurant) {
-      return restaurant.grade;
-    });
+  $.getJSON("https://data.cityofnewyork.us/resource/xx67-kt59.json?$q=" + userInput + "&boro=" + userBoro + "&$where=grade%20IS%20NOT%20NULL%20&$order=grade_date", function(data) {
 
-    var dateSorted = _.sortBy(withGrades, function(restaurant) {
-      return new Date(restaurant.grade_date)
-    });
+    // The below two functions are old, using the underscore library. They can probably be removed soon (JS 20170614)
 
-    // console.log(dateSorted);
+    // var withGrades = _.filter(data, function(restaurant) {
+    //   return restaurant.grade;
+    // });
 
-    var lastSortedIndex = dateSorted.length - 1;
-    var latestInspectionDate = Date.parse(dateSorted[lastSortedIndex].grade_date);
+    // var dateSorted = _.sortBy(data, function(restaurant) {
+    //   return new Date(restaurant.grade_date)
+    // });
+
+    // console.log(data);
+
+    var lastSortedIndex = data.length - 1;
+    var latestInspectionDate = Date.parse(data[lastSortedIndex].grade_date);
 
     // console.log(lastSortedIndex);
     // console.log(latestInspectionDate);
 
     function violationsDataPush (){
       for (i = lastSortedIndex; i >= 0; i--){
-        var checkDate = Date.parse(dateSorted[i].grade_date);
+        var checkDate = Date.parse(data[i].grade_date);
         if (checkDate == latestInspectionDate){
-          var correctedViolationDescription = dateSorted[i].violation_description.replaceAll(" Âº", "Âº");
+          var correctedViolationDescription = data[i].violation_description.replaceAll(" Âº", "Âº");
           correctedViolationDescription = correctedViolationDescription.replaceAll("Âº ", "Âº");
           correctedViolationDescription = correctedViolationDescription.replaceAll("Âº", "°");
           correctedViolationDescription = correctedViolationDescription.replaceAll("", "'");
@@ -65,15 +69,15 @@ $("button").on("click", function() {
     violationsDataPush();
     // console.log(violationData);
 
-    $("h2#dba-name").text(dateSorted[lastSortedIndex].dba);
+    $("h2#dba-name").text(data[lastSortedIndex].dba);
 
     certContainer
 
-    $("img#certificate").attr("src", "./img/" + dateSorted[lastSortedIndex].grade + ".png");
+    $("img#certificate").attr("src", "./img/" + data[lastSortedIndex].grade + ".png");
 
-    if (dateSorted[lastSortedIndex].grade = "Z") {
+    if (data[lastSortedIndex].grade = "Z") {
       $("img#certificate").attr("alt", "NYC sanitation grade pending.");
-    } else {$("img#certificate").attr("alt", "NYC Sanitation Grade " + dateSorted[lastSortedIndex].grade);};
+    } else {$("img#certificate").attr("alt", "NYC Sanitation Grade " + data[lastSortedIndex].grade);};
 
     function violationsDislpay(){
       var loopEnd = violationData.length;

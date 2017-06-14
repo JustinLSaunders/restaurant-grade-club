@@ -5,12 +5,13 @@
 
 body{
   font-family: 'Archivo Narrow', sans-serif;
+  font-size: 1em;
 }
 
 .search-tool{
   border-radius: 8px;
   border: solid 3px #df0000;
-  margin-top: 20px;
+  margin: 20px 2%;
 }
 
 header{
@@ -20,12 +21,26 @@ header{
 
 h1{
   color: #fff;
-  padding: 8px;
+  padding: 8px 8px 2px 8px;
   font-family: 'Shrikhand', cursive;
   font-weight: 400;
-  font-size: 4rem;
-  text-shadow: 3px 3px #000;
+  font-size: 2.75rem;
+  text-shadow: 2px 2px #000;
+  margin: 0;
+}
+
+h2#eat-here{
+  color: #fff;
+  padding: 2px 8px 8px 8px;
+  font-family: 'Shrikhand', cursive;
+  font-weight: 200;
+  font-size: 1.75rem;
+  text-shadow: 1.5px 1.5px #000;
   margin-top: 0;
+}
+
+#spacing{
+  letter-spacing: 4px;  
 }
 
 li.violation{
@@ -46,9 +61,9 @@ ul#violations-list{
   padding: 8px 2%;
 }
 
-select, input{
+select#boro, input#input-area{
   height: 25px;
-  padding: 1px 0;
+  padding: 1px 3px;
 }
 
 img{
@@ -76,5 +91,5 @@ footer{
   color: #fff;
   padding: 4px;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
