@@ -28,6 +28,20 @@ h1{
   margin-top: 0;
 }
 
+li.violation{
+  font-size:1.75rem;
+  list-style-type:none;
+  padding-bottom: 10px;
+}
+
+li.violation:last-child{
+  padding-bottom: 0;
+}
+
+ul#violations-list{
+  padding: 0;
+}
+
 #input-area{
   padding: 8px 2%;
 }
@@ -48,9 +62,9 @@ img{
 }
 
 div#certificate-display{
-  width: 10%;
+  width: 15%;
 }
 
 div#violations-display{
-  width: 80%;
+  width: 75%;
 }
