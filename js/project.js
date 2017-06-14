@@ -54,7 +54,8 @@ $("button").on("click", function() {
       for (i = lastSortedIndex; i >= 0; i--){
         var checkDate = Date.parse(dateSorted[i].grade_date);
         if (checkDate == latestInspectionDate){
-          var correctedViolationDescription = dateSorted[i].violation_description.replaceAll(" Âº", "Âº ");
+          var correctedViolationDescription = dateSorted[i].violation_description.replaceAll(" Âº", "Âº");
+          correctedViolationDescription = correctedViolationDescription.replaceAll("Âº ", "Âº");
           correctedViolationDescription = correctedViolationDescription.replaceAll("Âº", "°");
           correctedViolationDescription = correctedViolationDescription.replaceAll("", "'");
           violationData.push(correctedViolationDescription);
