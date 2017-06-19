@@ -7,26 +7,35 @@
   <meta name="author" content="Justin Saunders">
   <title>RestaurantGradeClub</title>
   <link rel="icon" type="image/png" href="./img/favicon-sm.png" />
-  <link rel="stylesheet" type="text/css" href="./css/normalize.css">
-<!--   <link rel="stylesheet" type="text/css" href="./css/simple-grid.css"> -->
-<!--   <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
- -->  <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow:400,400i,700,700i&amp;subset=latin-ext" rel="stylesheet">
+<!--   <link rel="stylesheet" type="text/css" href="./css/normalize.css"> -->
+  <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow:400,400i,700,700i&amp;subset=latin-ext" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
+  
+  <script type="text/javascript" src="./js/jquery-3.2.1.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+
+  <!-- Optional theme -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+
+  <!-- Latest compiled and minified JavaScript -->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+  <link rel="stylesheet" type="text/css" href="./css/normalize.css">
   <link rel="stylesheet" type="text/css" href="./css/style.css">
+
 
 </head>
 <body>
 
   <div class="container">
+    <div class="search-tool row">
 
-    <div class="search-tool">
-
-      <header>
+      <header class="col-xs-12">
         <h1>Restaurant Gra<span id="spacing">de</span></h1>
         <h2 id="eat-here">Should I Eat Here?</h2>
       </header>
 
-      <section id="input-area">
+      <section id="input-area" class="col-xs-12">
 
         <input type="text" id="user-input" placeholder="restaurant name">
 
@@ -41,20 +50,21 @@
         <button id="search">Search</button>
 
         <div class="results-container">
-          <div id="dba-container">
+          <div id="dba-container" class="col-xs-12">
           </div>
-          <div id="certificate-display">
+          <div id="certificate-display" class="col-xs-4 col-sm-2">
           </div>
-          <div id="violations-display">
+          <div id="violations-display" class="col-xs-12 col-sm-9">
           </div>
         </div>
       </section>
 
-      <footer>&copy; 2017 Justin Saunders</footer>
+      <footer class="col-xs-12">&copy; 2017 Justin Saunders</footer>
     </div>
   </div>
-  <script type="text/javascript" src="./js/jquery-3.2.1.js"></script>
-  <!-- <script type="text/javascript" src="./js/underscore.js"></script> -->
+
+
   <script type="text/javascript" src="./js/project.js"></script>
+
 </body>
 </html>

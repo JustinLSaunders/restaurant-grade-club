@@ -76,17 +76,16 @@ img{
   vertical-align: top;
 }
 
-div#certificate-display{
+/*div#certificate-display{
   width: 15%;
 }
 
 div#violations-display{
   width: 75%;
 }
-
+*/
 footer{
   background: #df0000;
-  margin-bottom: 0;
   text-align: right;
   color: #fff;
   padding: 4px;

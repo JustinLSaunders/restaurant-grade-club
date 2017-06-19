@@ -9,6 +9,8 @@ $("button").on("click", function() {
   var violationsContainer = document.getElementById("violations-display");
   var dbaContainer = document.getElementById("dba-container");
   var certContainer = document.getElementById("certificate-display");
+  var baseURL = "https://data.cityofnewyork.us/resource/xx67-kt59.json";
+  var queryString = "?$q=" + userInput + "&boro=" + userBoro + "&$where=grade%20IS%20NOT%20NULL%20&$order=grade_date";
 
   function oldItems(childElem, parentElem){
     var getOldItems = document.getElementById(childElem);
@@ -34,7 +36,7 @@ $("button").on("click", function() {
 
   // https://data.cityofnewyork.us/resource/xx67-kt59.json?$q" + userInput + "&boro=" + userBoro + "&$where=grade%20IS%20NOT%20NULL%20&$limit=5&$offset=20" //Consider how to use this for pagination (JS 20170614)
 
-  $.getJSON("https://data.cityofnewyork.us/resource/xx67-kt59.json?$q=" + userInput + "&boro=" + userBoro + "&$where=grade%20IS%20NOT%20NULL%20&$order=grade_date", function(data) {
+  $.getJSON(baseURL + queryString, function(data) {
 
     // The below two functions are old, using the underscore library. They can probably be removed soon (JS 20170614)
 
