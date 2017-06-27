@@ -10,7 +10,8 @@ $("button").on("click", function() {
   var dbaContainer = document.getElementById("dba-container");
   var certContainer = document.getElementById("certificate-display");
   var baseURL = "https://data.cityofnewyork.us/resource/xx67-kt59.json";
-  var queryString = "?$q=" + userInput + "&boro=" + userBoro + "&$where=grade%20IS%20NOT%20NULL%20&$order=grade_date";
+  var appToken = "CkMdPHTRlkUB2u1ixJnSUW3Ve";
+  var queryString = "?$q=" + userInput + "&boro=" + userBoro + "&$where=grade%20IS%20NOT%20NULL%20&$order=grade_date" + "&$$app_token=" + appToken;
 
   function oldItems(childElem, parentElem){
     var getOldItems = document.getElementById(childElem);
@@ -57,7 +58,7 @@ $("button").on("click", function() {
     // console.log(latestInspectionDate);
 
     function violationsDataPush (){
-      for (i = lastSortedIndex; i >= 0; i--){
+      for (var i = lastSortedIndex; i >= 0; i--){
         var checkDate = Date.parse(data[i].grade_date);
         if (checkDate == latestInspectionDate){
           var correctedViolationDescription = data[i].violation_description.replaceAll(" Âº", "Âº");
@@ -66,7 +67,7 @@ $("button").on("click", function() {
           correctedViolationDescription = correctedViolationDescription.replaceAll("", "'");
           violationData.push(correctedViolationDescription);
         }
-      };
+      }
     }
     violationsDataPush();
     // console.log(violationData);
@@ -79,11 +80,11 @@ $("button").on("click", function() {
 
     if (data[lastSortedIndex].grade = "Z") {
       $("img#certificate").attr("alt", "NYC sanitation grade pending.");
-    } else {$("img#certificate").attr("alt", "NYC Sanitation Grade " + data[lastSortedIndex].grade);};
+    } else {$("img#certificate").attr("alt", "NYC Sanitation Grade " + data[lastSortedIndex].grade);}
 
     function violationsDislpay(){
       var loopEnd = violationData.length;
-      for (i = 0; i < loopEnd; i++){
+      for (var i = 0; i < loopEnd; i++){
         var violationsList = document.getElementById("violations-list");
         var violationsItem = document.createElement("li");
         violationsItem.setAttribute("class", "violation");
