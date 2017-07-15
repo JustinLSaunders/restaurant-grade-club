@@ -92,3 +92,9 @@ footer{
   font-weight: bold;
   font-size: 1.5rem;
 }
+
+div#loader{
+  display: none;
+  color: #df0000;
+  font-weight: bold;
+}

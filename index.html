@@ -54,14 +54,21 @@
           <option value="STATEN ISLAND">Staten Island</option>
         </select>
 
-        <button id="search">Search</button>
+        <button id="search-btn">Search</button>
 
         <div class="results-container">
-          <div id="dba-container" class="col-xs-12">
+          <div id="loader">
+            <p>LOADING...</p>
           </div>
-          <div id="certificate-display" class="col-xs-4 col-sm-2">
-          </div>
-          <div id="violations-display" class="col-xs-12 col-sm-9">
+          <div id="info-display">
+            <div id="certificate-display" class="col-xs-4 col-sm-2">
+            </div>
+            <div>
+              <div id="dba-container" class="col-xs-12">
+              </div>
+              <div id="violations-display" class="col-xs-12 col-sm-9">
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -71,7 +78,7 @@
   </div>
 
 
-  <script type="text/javascript" src="./js/project.js"></script>
+  <script type="text/javascript" src="./js/sorting.js"></script>
 
 </body>
 </html>

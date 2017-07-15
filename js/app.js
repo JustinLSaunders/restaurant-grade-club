@@ -3,6 +3,8 @@ String.prototype.replaceAll = function(str1, str2, ignore){
 }
 
 $("button").on("click", function() {
+  $('#loader').toggle();
+  var internalData = [];
   var violationData = [];
   var userInput = $("input").val();
   var userBoro = $("#boro").val();
@@ -11,9 +13,9 @@ $("button").on("click", function() {
   var certContainer = document.getElementById("certificate-display");
   var baseURL = "https://data.cityofnewyork.us/resource/xx67-kt59.json";
   var appToken = "CkMdPHTRlkUB2u1ixJnSUW3Ve";
-  var queryString = "?$q=" + userInput + "&boro=" + userBoro + "&$where=grade%20IS%20NOT%20NULL%20&$order=grade_date" + "&$$app_token=" + appToken;
+  var queryString = "?$q=" + userInput + "&boro=" + userBoro + "&$where=grade%20IS%20NOT%20NULL%20&$order=camis DESC, grade_date DESC" + "&$$app_token=" + appToken;
 
-  function oldItems(childElem, parentElem){
+  function clearOldItems(childElem, parentElem){
     var getOldItems = document.getElementById(childElem);
     if (getOldItems != null) {
       var oldChild = document.getElementById(childElem);
@@ -27,9 +29,9 @@ $("button").on("click", function() {
     parentElem.appendChild(newElem);
   };
 
-  oldItems("dba-name", dbaContainer);
-  oldItems("certificate", certContainer);
-  oldItems("violations-list", violationsContainer);
+  clearOldItems("dba-name", dbaContainer);
+  clearOldItems("certificate", certContainer);
+  clearOldItems("violations-list", violationsContainer);
 
   newItems(dbaContainer, "h2", "dba-name");
   newItems(certContainer, "img", "certificate");
@@ -38,6 +40,9 @@ $("button").on("click", function() {
   // https://data.cityofnewyork.us/resource/xx67-kt59.json?$q" + userInput + "&boro=" + userBoro + "&$where=grade%20IS%20NOT%20NULL%20&$limit=5&$offset=20" //Consider how to use this for pagination (JS 20170614)
 
   $.getJSON(baseURL + queryString, function(data) {
+
+    internalData.push(data);
+    console.log(internalData);
 
     // The below two functions are old, using the underscore library. They can probably be removed soon (JS 20170614)
 
@@ -49,17 +54,17 @@ $("button").on("click", function() {
     //   return new Date(restaurant.grade_date)
     // });
 
-    // console.log(data);
-
     var lastSortedIndex = data.length - 1;
     var latestInspectionDate = Date.parse(data[lastSortedIndex].grade_date);
-
+  
     // console.log(lastSortedIndex);
     // console.log(latestInspectionDate);
 
     function violationsDataPush (){
       for (var i = lastSortedIndex; i >= 0; i--){
         var checkDate = Date.parse(data[i].grade_date);
+        var restaurantId = data[i].camis;
+
         if (checkDate == latestInspectionDate){
           var correctedViolationDescription = data[i].violation_description.replaceAll(" Âº", "Âº");
           correctedViolationDescription = correctedViolationDescription.replaceAll("Âº ", "Âº");
@@ -72,9 +77,9 @@ $("button").on("click", function() {
     violationsDataPush();
     // console.log(violationData);
 
+    $('#loader').toggle();
     $("h2#dba-name").text(data[lastSortedIndex].dba);
 
-    certContainer
 
     $("img#certificate").attr("src", "./img/" + data[lastSortedIndex].grade + ".png");
 
@@ -89,7 +94,7 @@ $("button").on("click", function() {
         var violationsItem = document.createElement("li");
         violationsItem.setAttribute("class", "violation");
         violationsList.appendChild(violationsItem);
-        // console.log(violationData[i]);
+        console.log(violationData[i]);
         var violationText = document.createTextNode(violationData[i]);
         violationsItem.appendChild(violationText);
       }
