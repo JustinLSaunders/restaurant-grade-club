@@ -5,102 +5,59 @@ String.prototype.replaceAll = function(str1, str2, ignore){
 $("button").on("click", function() {
   $('#loader').toggle();
   var internalData = [];
-  var violationData = [];
   var userInput = $("input").val();
   var userBoro = $("#boro").val();
-  var violationsContainer = document.getElementById("violations-display");
-  var dbaContainer = document.getElementById("dba-container");
-  var certContainer = document.getElementById("certificate-display");
   var baseURL = "https://data.cityofnewyork.us/resource/xx67-kt59.json";
   var appToken = "CkMdPHTRlkUB2u1ixJnSUW3Ve";
-  var queryString = "?$q=" + userInput + "&boro=" + userBoro + "&$where=grade%20IS%20NOT%20NULL%20&$order=camis DESC, grade_date DESC" + "&$$app_token=" + appToken;
-
-  function clearOldItems(childElem, parentElem){
-    var getOldItems = document.getElementById(childElem);
-    if (getOldItems != null) {
-      var oldChild = document.getElementById(childElem);
-      parentElem.removeChild(oldChild)
-    };
-  };
-
-  function newItems(parentElem, newElemType, idName){
-    var newElem = document.createElement(newElemType);
-    newElem.setAttribute("id", idName);
-    parentElem.appendChild(newElem);
-  };
-
-  clearOldItems("dba-name", dbaContainer);
-  clearOldItems("certificate", certContainer);
-  clearOldItems("violations-list", violationsContainer);
-
-  newItems(dbaContainer, "h2", "dba-name");
-  newItems(certContainer, "img", "certificate");
-  newItems(violationsContainer, "ul", "violations-list")
-
-  // https://data.cityofnewyork.us/resource/xx67-kt59.json?$q" + userInput + "&boro=" + userBoro + "&$where=grade%20IS%20NOT%20NULL%20&$limit=5&$offset=20" //Consider how to use this for pagination (JS 20170614)
+  var queryString = "?$q=" + userInput + "&boro=" + userBoro + "&$where=grade%20IS%20NOT%20NULL%20&$order=camis DESC, grade_date DESC"; //!+ "&$$app_token=" + appToken
 
   $.getJSON(baseURL + queryString, function(data) {
 
-    internalData.push(data);
-    console.log(internalData);
+    console.log(data);
+    var arraySize = data.length;
+    violationDataFilter();
 
-    // The below two functions are old, using the underscore library. They can probably be removed soon (JS 20170614)
+    function violationDataFilter  (){
+      for (var i = 0; i < arraySize; i++){
 
-    // var withGrades = _.filter(data, function(restaurant) {
-    //   return restaurant.grade;
-    // });
-
-    // var dateSorted = _.sortBy(data, function(restaurant) {
-    //   return new Date(restaurant.grade_date)
-    // });
-
-    var lastSortedIndex = data.length - 1;
-    var latestInspectionDate = Date.parse(data[lastSortedIndex].grade_date);
-  
-    // console.log(lastSortedIndex);
-    // console.log(latestInspectionDate);
-
-    function violationsDataPush (){
-      for (var i = lastSortedIndex; i >= 0; i--){
-        var checkDate = Date.parse(data[i].grade_date);
+        var restaurantName = data[i].dba;
         var restaurantId = data[i].camis;
+        var grade = data[i].grade;
+        var gradeDate = data[i].grade_date;
+        var gradeDateParsed = Date.parse(gradeDate);
+        var violationDescription = data[i].violation_description;
+        var address = (data[i].building + " " + data[i].street + " " + data[i].boro + " " + data[i].zipcode);
 
-        if (checkDate == latestInspectionDate){
-          var correctedViolationDescription = data[i].violation_description.replaceAll(" Âº", "Âº");
-          correctedViolationDescription = correctedViolationDescription.replaceAll("Âº ", "Âº");
-          correctedViolationDescription = correctedViolationDescription.replaceAll("Âº", "°");
-          correctedViolationDescription = correctedViolationDescription.replaceAll("", "'");
-          violationData.push(correctedViolationDescription);
+        if (i == 0) {
+          var latestGradeDate = gradeDate;
+          console.log(i + " " + restaurantName);
+          console.log(restaurantId);
+          console.log(grade);
+          console.log(gradeDate);
+          console.log(gradeDateParsed);
+          console.log(address);
+          console.log(violationDescription);
+        };
+
+        if (i !== 0) {
+          var previousRestaurantId = data[i - 1].camis;
+          var previousGradeDate = data[i - 1].grade_date;
+          var previousGradeDateParsed = Date.parse(previousGradeDate);
+          if (restaurantId == previousRestaurantId && gradeDate == latestGradeDate) {
+            console.log(violationDescription);
+          } else if (restaurantId != previousRestaurantId){
+            latestGradeDate = gradeDate;
+            console.log(i + " " + restaurantName);
+            console.log(restaurantId);
+            console.log(grade);
+            console.log(gradeDate);
+            console.log(gradeDateParsed);
+            console.log(address);
+            console.log(violationDescription); 
+          }
         }
       }
     }
-    violationsDataPush();
-    // console.log(violationData);
-
     $('#loader').toggle();
-    $("h2#dba-name").text(data[lastSortedIndex].dba);
-
-
-    $("img#certificate").attr("src", "./img/" + data[lastSortedIndex].grade + ".png");
-
-    if (data[lastSortedIndex].grade = "Z") {
-      $("img#certificate").attr("alt", "NYC sanitation grade pending.");
-    } else {$("img#certificate").attr("alt", "NYC Sanitation Grade " + data[lastSortedIndex].grade);}
-
-    function violationsDislpay(){
-      var loopEnd = violationData.length;
-      for (var i = 0; i < loopEnd; i++){
-        var violationsList = document.getElementById("violations-list");
-        var violationsItem = document.createElement("li");
-        violationsItem.setAttribute("class", "violation");
-        violationsList.appendChild(violationsItem);
-        console.log(violationData[i]);
-        var violationText = document.createTextNode(violationData[i]);
-        violationsItem.appendChild(violationText);
-      }
-    }
-
-    violationsDislpay();
-
   });
 });
