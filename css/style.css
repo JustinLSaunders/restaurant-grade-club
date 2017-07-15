@@ -31,7 +31,7 @@ h1{
   margin: 0;
 }
 
-h2#eat-here{
+#eat-here{
   color: #fff;
   padding: 2px 0 8px 0;
   font-family: 'Shrikhand', cursive;
@@ -64,17 +64,21 @@ ul#violations-list{
 }
 
 select#boro, input#input-area{
-  height: 25px;
   padding: 1px 3px;
+}
+
+select {
+  height: 26px;
 }
 
 img{
   width: 100%;
 }
 
-#certificate-display, #violations-display{
+.certificate-display, .violations-display{
   display: inline-block;
   margin: 8px 0;
+  padding: 0;
   vertical-align: top;
 }
 
@@ -86,6 +90,21 @@ div#violations-display{
   width: 75%;
 }
 */
+.details-container {
+  padding: 0;
+  margin: 0;
+}
+
+.dba-display {
+  margin: 0;
+  padding: 0;
+}
+
+.violations-display {
+  margin: 0;
+  padding: 0;
+}
+
 footer{
   background: #df0000;
   text-align: right;

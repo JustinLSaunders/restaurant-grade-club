@@ -6,10 +6,10 @@ $("button").on("click", function() {
   $('#loader').toggle();
   var internalData = [];
   var userInput = $("input").val();
-  var userBoro = $("#boro").val();
+  var userBorough = $("#borough").val();
   var baseURL = "https://data.cityofnewyork.us/resource/xx67-kt59.json";
   var appToken = "CkMdPHTRlkUB2u1ixJnSUW3Ve";
-  var queryString = "?$q=" + userInput + "&boro=" + userBoro + "&$where=grade%20IS%20NOT%20NULL%20&$order=camis DESC, grade_date DESC"; //!+ "&$$app_token=" + appToken
+  var queryString = "?$q=" + userInput + "&boro=" + userBorough + "&$where=grade%20IS%20NOT%20NULL%20&$order=camis DESC, grade_date DESC"; //!+ "&$$app_token=" + appToken
 
   $.getJSON(baseURL + queryString, function(data) {
 

@@ -39,19 +39,20 @@
 
         <header class="col-xs-12">
           <h1>Restaurant Gra<span id="spacing">de</span></h1>
-          <h2 id="eat-here">Should I Eat Here?</h2>
+          <p id="eat-here">Should I Eat Here?</p>
         </header>
 
         <section id="input-area" class="col-xs-12">
 
-          <input type="text" id="user-input" placeholder="restaurant name">
+          <input type="text" id="user-input" placeholder="RESTAURANT NAME">
 
-          <select id="boro">
-            <option value="MANHATTAN">Manhattan</option>
-            <option value="BROOKLYN">Brooklyn</option>
-            <option value="QUEENS">Queens</option>
-            <option value="BRONX">The Bronx</option>
-            <option value="STATEN ISLAND">Staten Island</option>
+          <select id="borough">
+            <option id="default" selected="selected">BOROUGH</option>
+            <option id="manhattan" value="MANHATTAN">Manhattan</option>
+            <option id="brooklyn" value="BROOKLYN">Brooklyn</option>
+            <option id="queens" value="QUEENS">Queens</option>
+            <option id="bronx" value="BRONX">The Bronx</option>
+            <option id="staten island" value="STATEN ISLAND">Staten Island</option>
           </select>
 
           <button id="search-btn">Search</button>
@@ -61,14 +62,29 @@
               <p>JUST A SEC...</p>
             </div>
             <div id="info-display row">
-              <div id="certificate-display" class="col-xs-1 col-sm-2"><p>A</p>
+              <div class="certificate-display col-xs-1 col-sm-2"><img src="./img/a.png">
               </div>
-              <div id="dba-container" class="col-xs-11 col-sm-10">
-                <h2>La La's Diner</h2>
+              <div  class="details-container col-xs-11 col-sm-10">
+                <div class="dba-display col-xs-12">
+                  <h2>La La's Diner</h2>
+                </div>
+                <div class="violations-display col-xs-12">
+                  <p>Tobacco use, eating, or drinking from open container in food preparation, food storage or dishwashing area observed.</p>
+                  <p>Food not protected from potential source of contamination during storage, preparation, transportation, display or service.</p>
+                </div>
               </div>
-              <div id="violations-display" class="col-xs-12">
-                <p>Buncha gross shit</p>
-                <p>Even more gross shit!</p>
+            </div>
+            <div id="info-display row">
+              <div class="certificate-display col-xs-1 col-sm-2"><img src="./img/a.png">
+              </div>
+              <div  class="details-container col-xs-11 col-sm-10">
+                <div class="dba-display col-xs-12">
+                  <h2>La La's Diner</h2>
+                </div>
+                <div class="violations-display col-xs-12">
+                  <p>Tobacco use, eating, or drinking from open container in food preparation, food storage or dishwashing area observed.</p>
+                  <p>Food not protected from potential source of contamination during storage, preparation, transportation, display or service.</p>
+                </div>
               </div>
             </div>
           </div>
