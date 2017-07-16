@@ -40,16 +40,16 @@
 
           <section id="input-area">
 
-            <input type="text" id="user-input" placeholder="RESTAURANT NAME">
-
-            <select id="borough">
-              <option id="default" selected="selected">BOROUGH</option>
-              <option id="manhattan" value="MANHATTAN">Manhattan</option>
+            <select id="borough" required>
+              <option id="default" value="" disabled selected hidden>SELECT THE BOROUGH</option>
+              <option id="manhattan" value="MANHATTAN">Manhattan</option> 
               <option id="brooklyn" value="BROOKLYN">Brooklyn</option>
               <option id="queens" value="QUEENS">Queens</option>
               <option id="bronx" value="BRONX">The Bronx</option>
               <option id="staten island" value="STATEN ISLAND">Staten Island</option>
             </select>
+
+            <input type="text" id="user-input" placeholder="RESTAURANT NAME">
 
             <button id="search-btn">Search</button>
           </section>

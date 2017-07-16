@@ -2,7 +2,13 @@ String.prototype.replaceAll = function(str1, str2, ignore){
   return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
 };
 
-$("button").on("click", function() {
+$("#user-input").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#search-btn").click();
+    }
+});
+
+$("#search-btn").on("click", function() {
   var resultsContainer = document.getElementById("results-container");
 
   function clearOldItems(parentElem, childElem){
@@ -20,8 +26,7 @@ $("button").on("click", function() {
   var userBorough = $("#borough").val();
   var baseURL = "https://data.cityofnewyork.us/resource/xx67-kt59.json";
   var appToken = "CkMdPHTRlkUB2u1ixJnSUW3Ve";
-  var queryString = "?$q=" + userInput + "&boro=" + userBorough + "&$where=grade%20IS%20NOT%20NULL%20&$order=camis DESC, grade_date DESC";
-    //  + "&$$app_token=" + appToken
+  var queryString = "?$$app_token=" + appToken + "&$q=" + userInput + "&boro=" + userBorough + "&$where=grade%20IS%20NOT%20NULL%20&$order=camis DESC, grade_date DESC";
 
   $.getJSON(baseURL + queryString, function(data) {
 
