@@ -6,55 +6,130 @@
   <meta name="keywords" content="HTML,CSS,JavaScript">
   <meta name="author" content="Justin Saunders">
   <title>RestaurantGradeClub</title>
-  <link rel="icon" type="image/png" href="./img/favicon-sm.png" />
-  <link rel="stylesheet" type="text/css" href="./css/normalize.css">
-<!--   <link rel="stylesheet" type="text/css" href="./css/simple-grid.css"> -->
-<!--   <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
- -->  <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow:400,400i,700,700i&amp;subset=latin-ext" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+  <link rel="manifest" href="img/favicon/manifest.json">
+  <link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#df0000">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- <link rel="icon" type="image/png" href="./img/favicon-sm.png" /> -->
+<!--   <link rel="stylesheet" type="text/css" href="./css/normalize.css"> -->
+  <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow:400,400i,700,700i&amp;subset=latin-ext" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
+  
+  <script type="text/javascript" src="./js/jquery-3.2.1.js"></script>
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="./css/normalize.css">
   <link rel="stylesheet" type="text/css" href="./css/style.css">
 
 </head>
+
 <body>
+  <div class="tool-container">
+    <div class="container">
+      <div class="row">
+        <div class="search-tool col-xs-12 col-sm-8 col-md-6 col-md-offset-3">
 
-  <div class="container">
+          <header>
+            <h1>Restaurant Gra<span id="spacing">de</span></h1>
 
-    <div class="search-tool">
+          </header>
 
-      <header>
-        <h1>Restaurant Gra<span id="spacing">de</span></h1>
-        <h2 id="eat-here">Should I Eat Here?</h2>
-      </header>
+          <section id="input-area">
 
-      <section id="input-area">
+            <input type="text" id="user-input" placeholder="RESTAURANT NAME">
 
-        <input type="text" id="user-input" placeholder="restaurant name">
+            <select id="borough">
+              <option id="default" selected="selected">BOROUGH</option>
+              <option id="manhattan" value="MANHATTAN">Manhattan</option>
+              <option id="brooklyn" value="BROOKLYN">Brooklyn</option>
+              <option id="queens" value="QUEENS">Queens</option>
+              <option id="bronx" value="BRONX">The Bronx</option>
+              <option id="staten island" value="STATEN ISLAND">Staten Island</option>
+            </select>
 
-        <select id="boro">
-          <option value="MANHATTAN">Manhattan</option>
-          <option value="BROOKLYN">Brooklyn</option>
-          <option value="QUEENS">Queens</option>
-          <option value="BRONX">The Bronx</option>
-          <option value="STATEN ISLAND">Staten Island</option>
-        </select>
+            <button id="search-btn">Search</button>
+          </section>
+            
+            
+            <div id="results-container">
+              <div id="loader">
+                <p>JUST A SEC...</p>
+              </div>
 
-        <button id="search">Search</button>
 
-        <div class="results-container">
-          <div id="dba-container">
-          </div>
-          <div id="certificate-display">
-          </div>
-          <div id="violations-display">
-          </div>
+
+              <!-- <div id="returned-info">
+                <div class="info-display row">
+                  <div class="certificate-display col-xs-2 col-sm-2"><img src="./img/a.png">
+                  </div>
+                  <div  class="details-container col-xs-10 col-sm-10">
+                    <div class="dba-display col-xs-12">
+                      <h2>La La's Diner</h2>
+                    </div>
+                    <div class="address-display col-xs-12">
+                      <p>4017 BROADWAY QUEENS 11103</p>
+                    </div>
+                    <div class="violations-display col-xs-12">
+                      <p>Tobacco use, eating, or drinking from open container in food preparation, food storage or dishwashing area observed.</p>
+                      <p>Food not protected from potential source of contamination during storage, preparation, transportation, display or service.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="info-display row">
+                  <div class="certificate-display col-xs-2 col-sm-2"><img src="./img/a.png">
+                  </div>
+                  <div  class="details-container col-xs-10 col-sm-10">
+                    <div class="dba-display col-xs-12">
+                      <h2>La La's Diner</h2>
+                    </div>
+                    <div class="address-display col-xs-12">
+                      <p>4017 BROADWAY QUEENS 11103</p>
+                    </div>
+                    <div class="violations-display col-xs-12">
+                      <p>Tobacco use, eating, or drinking from open container in food preparation, food storage or dishwashing area observed.</p>
+                      <p>Food not protected from potential source of contamination during storage, preparation, transportation, display or service.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="info-display row">
+                  <div class="certificate-display col-xs-2 col-sm-2"><img src="./img/a.png">
+                  </div>
+                  <div  class="details-container col-xs-10 col-sm-10">
+                    <div class="dba-display col-xs-12">
+                      <h2>La La's Diner</h2>
+                    </div>
+                    <div class="address-display col-xs-12">
+                      <p>4017 BROADWAY QUEENS 11103</p>
+                    </div>
+                    <div class="violations-display col-xs-12">
+                      <p>Tobacco use, eating, or drinking from open container in food preparation, food storage or dishwashing area observed.</p>
+                      <p>Food not protected from potential source of contamination during storage, preparation, transportation, display or service.</p>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+
+            </div>
+          </section>
+
+          <footer class="col-xs-12">&copy; 2017 Justin Saunders</footer>
         </div>
-      </section>
-
-      <footer>&copy; 2017 Justin Saunders</footer>
+      </div>
     </div>
   </div>
-  <script type="text/javascript" src="./js/jquery-3.2.1.js"></script>
-  <!-- <script type="text/javascript" src="./js/underscore.js"></script> -->
-  <script type="text/javascript" src="./js/project.js"></script>
+
+
+  <script type="text/javascript" src="./js/app.js"></script>
+
 </body>
 </html>

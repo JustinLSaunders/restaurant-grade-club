@@ -1,95 +1,122 @@
-#cert-a, #cert-b, #cert-c, #cert-pending{
-  display: none;
-  margin: 10px auto;
-}
-
 body{
   font-family: 'Archivo Narrow', sans-serif;
-  font-size: 1em;
+  font-size: 1.75em;
+  background: #D5E7F2;
 }
 
-.search-tool{
-  border-radius: 8px;
-  border: solid 3px #df0000;
+input, select, button{
+  width: 96%;
+  display: block;
+  margin: 0 2% 8px 2%;
+}
+
+button{
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  height: 40px;
+}
+
+.tool-container{
+  display: block;
   margin: 20px 2%;
 }
 
+.search-tool{
+  background: #fff;
+  border-radius: 8px;
+  border: solid 3px #df0000;
+  margin: 0;
+  padding: 0;
+}
+
 header{
+  display: block; 
   background: #df0000;
-  margin-top: 0;
+  margin: 0;
+  padding: 0 2%;
 }
 
 h1{
   color: #fff;
-  padding: 8px 8px 2px 8px;
+  padding: 8px 0;
   font-family: 'Shrikhand', cursive;
   font-weight: 400;
-  font-size: 2.75rem;
+  font-size: 3.75rem;
   text-shadow: 2px 2px #000;
   margin: 0;
 }
 
-h2#eat-here{
+#eat-here{
   color: #fff;
-  padding: 2px 8px 8px 8px;
+  padding: 2px 0 8px 0;
   font-family: 'Shrikhand', cursive;
   font-weight: 200;
-  font-size: 1.75rem;
+  font-size: 2.75rem;
   text-shadow: 1.5px 1.5px #000;
-  margin-top: 0;
+  margin: 0;
 }
 
 #spacing{
   letter-spacing: 4px;  
 }
 
-li.violation{
-  font-size:1.75rem;
-  list-style-type:none;
-  padding-bottom: 10px;
-}
-
-li.violation:last-child{
-  padding-bottom: 0;
-}
-
-ul#violations-list{
-  padding: 0;
-}
-
 #input-area{
-  padding: 8px 2%;
+  background: #f1f1f1;
+  border-bottom: 3px solid #df0000;
+  padding: 10px 0;
 }
 
 select#boro, input#input-area{
-  height: 25px;
   padding: 1px 3px;
 }
 
-img{
-  width: 100%;
+select {
+  height: 26px;
 }
 
-#certificate-display, #violations-display{
-  display: inline-block;
-  margin: 8px 2%;
-  vertical-align: top;
+img {
+  width: 88%;
+  padding: 15px 10% 5px 2%;
 }
 
-div#certificate-display{
-  width: 15%;
+#returned-info{
+  margin: 0 2%;
 }
 
-div#violations-display{
-  width: 75%;
+.info-display{
+  margin: 0;
+  border-bottom: solid 2px #D5E7F2;
+}
+
+.info-display:last-child{
+  border: none;
+  margin-bottom: 8px;
+}
+
+.certificate-display, .violations-display, .details-container, .dba-display {
+  margin: 0;
+  padding: 0;
+}
+
+.address-display{
+  margin: 0;
+  padding: 0;
+  font-size: 1.5rem;
 }
 
 footer{
   background: #df0000;
-  margin-bottom: 0;
   text-align: right;
   color: #fff;
   padding: 4px;
   font-weight: bold;
   font-size: 1.5rem;
+}
+
+div#loader{
+  display: none;
+  color: #df0000;
+  font-weight: bold;
+  padding: 8px 2%;
 }
