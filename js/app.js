@@ -16,7 +16,6 @@ $("button").on("click", function() {
   clearOldItems(resultsContainer, "returned-info");
 
   $('#loader').toggle();
-  var internalData = [];
   var userInput = $("input").val();
   var userBorough = $("#borough").val();
   var baseURL = "https://data.cityofnewyork.us/resource/xx67-kt59.json";
@@ -28,14 +27,13 @@ $("button").on("click", function() {
 
     var arraySize = data.length;
 
-    if (arraySize == 0) {
+    if ((arraySize == 0) || (userInput.includes(";"))) {
       var returnedInfo = $('<div>').attr({'id': 'returned-info'});
 
       $('#results-container').append(returnedInfo);
-      $('#returned-info').append('<p class="error-message">' + "I COULDN'T FIND THAT RESTAURANT<br>PLEASE DOUBLE-CHECK THE NAME</p>");
-    };
 
-    dataFilter();
+      $('#returned-info').append('<p class="error-message">' + "I COULDN'T FIND THAT RESTAURANT<br>PLEASE DOUBLE-CHECK THE NAME</p>");
+    } else {dataFilter()}
 
     function dataFilter  (){
       for (var i = 0; i < arraySize; i++){
