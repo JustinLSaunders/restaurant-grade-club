@@ -32,10 +32,10 @@ $("button").on("click", function() {
     if (arraySize == 0) {
       var returnedInfo = $('<div>').attr({'id': 'returned-info'});
 
-      var errorDisplay = $('<p class="error-message">').text("I couldn't find that restaurant. Please double check your spelling.");
+      // var errorDisplay = $('<p class="error-message">').text("I couldn't find that restaurant. Please double-check your spelling.");
 
       $('#results-container').append(returnedInfo);
-      $('#returned-info').append(errorDisplay);
+      $('#returned-info').append('<p class="error-message">' + "I COULDN'T FIND THAT RESTAURANT<br>PLEASE DOUBLE-CHECK THE NAME</p>");
     };
 
     dataFilter();

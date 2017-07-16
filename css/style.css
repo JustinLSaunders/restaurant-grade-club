@@ -78,7 +78,8 @@ select {
 .error-message {
   color: #df0000;
   font-weight: bold;
-  padding: 8px 0;
+  padding: 8px 0 0 0;
+  line-height: 3rem;
 }
 
 .certificate {
