@@ -1,8 +1,20 @@
 String.prototype.replaceAll = function(str1, str2, ignore){
   return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
-}
+};
 
 $("button").on("click", function() {
+  var resultsContainer = document.getElementById("results-container");
+
+  function clearOldItems(parentElem, childElem){
+    var oldResults = document.getElementById(childElem);
+    if (oldResults != null) {
+      var oldChild = document.getElementById(childElem);
+      resultsContainer.removeChild(oldChild)
+    };
+  };
+
+  clearOldItems(resultsContainer, "returned-info");
+
   $('#loader').toggle();
   var internalData = [];
   var userInput = $("input").val();
@@ -17,9 +29,12 @@ $("button").on("click", function() {
     var arraySize = data.length;
     violationDataFilter();
 
+    if (arraySize == 0) {
+      console.log("Please check your spelling.");
+    }
+
     function violationDataFilter  (){
       for (var i = 0; i < arraySize; i++){
-
         var restaurantName = data[i].dba;
         var restaurantId = data[i].camis;
         var grade = data[i].grade;
@@ -61,3 +76,23 @@ $("button").on("click", function() {
     $('#loader').toggle();
   });
 });
+
+
+
+// <div id="info-display row">
+//   <div class="certificate-display col-xs-1 col-sm-2">
+//     <img src="./img/a.png">
+//   </div>
+//   <div  class="details-container col-xs-11 col-sm-10">
+//     <div class="dba-display col-xs-12">
+//       <h2>La La's Diner</h2>
+//     </div>
+//     <div class="address-display col-xs-12">
+//       <p>4017 BROADWAY QUEENS 11103</p>
+//     </div>
+//     <div class="violations-display col-xs-12">
+//       <p>Tobacco use, eating, or drinking from open container in food preparation, food storage or dishwashing area observed.</p>
+//       <p>Food not protected from potential source of contamination during storage, preparation, transportation, display or service.</p>
+//     </div>
+//   </div>
+// </div>

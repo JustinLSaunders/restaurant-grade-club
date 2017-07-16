@@ -20,83 +20,110 @@
   
   <script type="text/javascript" src="./js/jquery-3.2.1.js"></script>
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-  <!-- Optional theme -->
- <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="./css/normalize.css">
   <link rel="stylesheet" type="text/css" href="./css/style.css">
 
-
 </head>
+
 <body>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="search-tool col-xs-12 col-sm-8 col-lg-6">
+  <div class="tool-container">
+    <div class="container">
+      <div class="row">
+        <div class="search-tool col-xs-12 col-sm-8 col-md-6 col-md-offset-3">
 
-        <header class="col-xs-12">
-          <h1>Restaurant Gra<span id="spacing">de</span></h1>
-          <p id="eat-here">Should I Eat Here?</p>
-        </header>
+          <header>
+            <h1>Restaurant Gra<span id="spacing">de</span></h1>
 
-        <section id="input-area" class="col-xs-12">
+          </header>
 
-          <input type="text" id="user-input" placeholder="RESTAURANT NAME">
+          <section id="input-area">
 
-          <select id="borough">
-            <option id="default" selected="selected">BOROUGH</option>
-            <option id="manhattan" value="MANHATTAN">Manhattan</option>
-            <option id="brooklyn" value="BROOKLYN">Brooklyn</option>
-            <option id="queens" value="QUEENS">Queens</option>
-            <option id="bronx" value="BRONX">The Bronx</option>
-            <option id="staten island" value="STATEN ISLAND">Staten Island</option>
-          </select>
+            <input type="text" id="user-input" placeholder="RESTAURANT NAME">
 
-          <button id="search-btn">Search</button>
+            <select id="borough">
+              <option id="default" selected="selected">BOROUGH</option>
+              <option id="manhattan" value="MANHATTAN">Manhattan</option>
+              <option id="brooklyn" value="BROOKLYN">Brooklyn</option>
+              <option id="queens" value="QUEENS">Queens</option>
+              <option id="bronx" value="BRONX">The Bronx</option>
+              <option id="staten island" value="STATEN ISLAND">Staten Island</option>
+            </select>
 
-          <div class="results-container">
-            <div id="loader">
-              <p>JUST A SEC...</p>
+            <button id="search-btn">Search</button>
+          </section>
+            
+            
+            <div id="results-container">
+              <div id="loader">
+                <p>JUST A SEC...</p>
+              </div>
+
+              <!-- Start of the example results -->
+
+              <div id="returned-info">
+                <div class="info-display row">
+                  <div class="certificate-display col-xs-2 col-sm-2"><img src="./img/a.png">
+                  </div>
+                  <div  class="details-container col-xs-10 col-sm-10">
+                    <div class="dba-display col-xs-12">
+                      <h2>La La's Diner</h2>
+                    </div>
+                    <div class="address-display col-xs-12">
+                      <p>4017 BROADWAY QUEENS 11103</p>
+                    </div>
+                    <div class="violations-display col-xs-12">
+                      <p>Tobacco use, eating, or drinking from open container in food preparation, food storage or dishwashing area observed.</p>
+                      <p>Food not protected from potential source of contamination during storage, preparation, transportation, display or service.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="info-display row">
+                  <div class="certificate-display col-xs-2 col-sm-2"><img src="./img/a.png">
+                  </div>
+                  <div  class="details-container col-xs-10 col-sm-10">
+                    <div class="dba-display col-xs-12">
+                      <h2>La La's Diner</h2>
+                    </div>
+                    <div class="address-display col-xs-12">
+                      <p>4017 BROADWAY QUEENS 11103</p>
+                    </div>
+                    <div class="violations-display col-xs-12">
+                      <p>Tobacco use, eating, or drinking from open container in food preparation, food storage or dishwashing area observed.</p>
+                      <p>Food not protected from potential source of contamination during storage, preparation, transportation, display or service.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="info-display row">
+                  <div class="certificate-display col-xs-2 col-sm-2"><img src="./img/a.png">
+                  </div>
+                  <div  class="details-container col-xs-10 col-sm-10">
+                    <div class="dba-display col-xs-12">
+                      <h2>La La's Diner</h2>
+                    </div>
+                    <div class="address-display col-xs-12">
+                      <p>4017 BROADWAY QUEENS 11103</p>
+                    </div>
+                    <div class="violations-display col-xs-12">
+                      <p>Tobacco use, eating, or drinking from open container in food preparation, food storage or dishwashing area observed.</p>
+                      <p>Food not protected from potential source of contamination during storage, preparation, transportation, display or service.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- End of example results -->
             </div>
-            <div id="info-display row">
-              <div class="certificate-display col-xs-1 col-sm-2"><img src="./img/a.png">
-              </div>
-              <div  class="details-container col-xs-11 col-sm-10">
-                <div class="dba-display col-xs-12">
-                  <h2>La La's Diner</h2>
-                </div>
-                <div class="address-display col-xs-12">
-                  <p>4017 BROADWAY QUEENS 11103</p>
-                </div>
-                <div class="violations-display col-xs-12">
-                  <p>Tobacco use, eating, or drinking from open container in food preparation, food storage or dishwashing area observed.</p>
-                  <p>Food not protected from potential source of contamination during storage, preparation, transportation, display or service.</p>
-                </div>
-              </div>
-            </div>
-            <div id="info-display row">
-              <div class="certificate-display col-xs-1 col-sm-2"><img src="./img/a.png">
-              </div>
-              <div  class="details-container col-xs-11 col-sm-10">
-                <div class="dba-display col-xs-12">
-                  <h2>La La's Diner</h2>
-                </div>
-                <div class="address-display col-xs-12">
-                  <p>4017 BROADWAY QUEENS 11103</p>
-                </div>
-                <div class="violations-display col-xs-12">
-                  <p>Tobacco use, eating, or drinking from open container in food preparation, food storage or dishwashing area observed.</p>
-                  <p>Food not protected from potential source of contamination during storage, preparation, transportation, display or service.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+          </section>
 
-        <footer class="col-xs-12">&copy; 2017 Justin Saunders</footer>
+          <footer class="col-xs-12">&copy; 2017 Justin Saunders</footer>
+        </div>
       </div>
     </div>
   </div>
