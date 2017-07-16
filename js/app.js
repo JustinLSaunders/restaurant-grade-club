@@ -68,6 +68,8 @@ $("button").on("click", function() {
           violationDescription = violationDescription.replaceAll("Âº ", "Âº");
           violationDescription = violationDescription.replaceAll("Âº", "°");
           violationDescription = violationDescription.replaceAll("", "'");
+          violationDescription = violationDescription.replaceAll("''''", "'");
+
         } else {
           violationDescription = "Woah! No violations!"
         };
