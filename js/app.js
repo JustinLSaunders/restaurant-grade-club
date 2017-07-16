@@ -26,13 +26,10 @@ $("button").on("click", function() {
 
   $.getJSON(baseURL + queryString, function(data) {
 
-    console.log(data);
     var arraySize = data.length;
 
     if (arraySize == 0) {
       var returnedInfo = $('<div>').attr({'id': 'returned-info'});
-
-      // var errorDisplay = $('<p class="error-message">').text("I couldn't find that restaurant. Please double-check your spelling.");
 
       $('#results-container').append(returnedInfo);
       $('#returned-info').append('<p class="error-message">' + "I COULDN'T FIND THAT RESTAURANT<br>PLEASE DOUBLE-CHECK THE NAME</p>");
@@ -55,16 +52,18 @@ $("button").on("click", function() {
         var restaurantId = data[i].camis;
         var violationsDisplay = $('<div>').attr({'class': 'violations-display col-xs-12', 'id': 'violations-display' + restaurantId});
         var grade = data[i].grade;
-        var DOMCert = $('<img class="certificate">').attr('src', './img/' + grade + '.png');
+        
+        if ((grade === "Z") || (grade ===  "P")){
+          var altTag = "NYC Sanitation Grade Pending"
+        } else {
+          var altTag = "NYC Sanitation Grade " + grade
+        };
+
+        var DOMCert = $('<img class="certificate">').attr({'src': './img/' + grade + '.png', 'alt': altTag});
+
         var gradeDate = data[i].grade_date;
         var gradeDateParsed = Date.parse(gradeDate);
         var violationDescription = data[i].violation_description;
-
-        // $('.element span').each(function() {
-        //   console.log($(this).text());
-        //   var text = $(this).text().replace(' Âº', 'Âº');
-        //   $(this).text(text);
-        // });
 
         if (violationDescription != null){
           violationDescription = violationDescription.replaceAll(" Âº", "Âº");
@@ -122,23 +121,3 @@ $("button").on("click", function() {
     $('#loader').toggle();
   });
 });
-
-
-
-// <div id="info-display row">
-//   <div class="certificate-display col-xs-1 col-sm-2">
-//     <img src="./img/a.png">
-//   </div>
-//   <div  class="details-container col-xs-11 col-sm-10">
-//     <div class="dba-display col-xs-12">
-//       <h2>La La's Diner</h2>
-//     </div>
-//     <div class="address-display col-xs-12">
-//       <p>4017 BROADWAY QUEENS 11103</p>
-//     </div>
-//     <div class="violations-display col-xs-12">
-//       <p>Tobacco use, eating, or drinking from open container in food preparation, food storage or dishwashing area observed.</p>
-//       <p>Food not protected from potential source of contamination during storage, preparation, transportation, display or service.</p>
-//     </div>
-//   </div>
-// </div>
