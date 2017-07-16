@@ -47,7 +47,7 @@ h1{
   margin: 0;
 }
 
-#eat-here{
+/*#eat-here{
   color: #fff;
   padding: 2px 0 8px 0;
   font-family: 'Shrikhand', cursive;
@@ -55,7 +55,7 @@ h1{
   font-size: 2.75rem;
   text-shadow: 1.5px 1.5px #000;
   margin: 0;
-}
+}*/
 
 #spacing{
   letter-spacing: 4px;  
@@ -75,7 +75,13 @@ select {
   height: 26px;
 }
 
-img {
+.error-message {
+  color: #df0000;
+  font-weight: bold;
+  padding: 8px 0;
+}
+
+.certificate {
   width: 88%;
   padding: 15px 10% 5px 2%;
 }

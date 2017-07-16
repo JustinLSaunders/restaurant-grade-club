@@ -28,11 +28,17 @@ $("button").on("click", function() {
 
     console.log(data);
     var arraySize = data.length;
-    dataFilter();
 
     if (arraySize == 0) {
-      console.log("Please check your spelling.");
-    }
+      var returnedInfo = $('<div>').attr({'id': 'returned-info'});
+
+      var errorDisplay = $('<p class="error-message">').text("I couldn't find that restaurant. Please double check your spelling.");
+
+      $('#results-container').append(returnedInfo);
+      $('#returned-info').append(errorDisplay);
+    };
+
+    dataFilter();
 
     function dataFilter  (){
       for (var i = 0; i < arraySize; i++){
@@ -49,15 +55,21 @@ $("button").on("click", function() {
         var restaurantId = data[i].camis;
         var violationsDisplay = $('<div>').attr({'class': 'violations-display col-xs-12', 'id': 'violations-display' + restaurantId});
         var grade = data[i].grade;
-        var DOMCert = $('<img>').attr('src', './img/' + grade + '.png');
+        var DOMCert = $('<img class="certificate">').attr('src', './img/' + grade + '.png');
         var gradeDate = data[i].grade_date;
         var gradeDateParsed = Date.parse(gradeDate);
-        var typoViolationText = data[i].violation_description;
+        var violationDescription = data[i].violation_description;
 
-        var violationDescription = typoViolationText.replaceAll(" Âº", "Âº");
-        violationDescription = violationDescription.replaceAll("Âº ", "Âº");
-        violationDescription = violationDescription.replaceAll("Âº", "°");
-        violationDescription = violationDescription.replaceAll("", "'");
+        // $('.element span').each(function() {
+        //   console.log($(this).text());
+        //   var text = $(this).text().replace(' Âº', 'Âº');
+        //   $(this).text(text);
+        // });
+
+        // violationDescription = violationDescription.replaceAll(" Âº", "Âº");
+        // violationDescription = violationDescription.replaceAll("Âº ", "Âº");
+        // violationDescription = violationDescription.replaceAll("Âº", "°");
+        // violationDescription = violationDescription.replaceAll("", "'");
 
         var address = (data[i].building + " " + data[i].street + " " + data[i].boro + " " + data[i].zipcode);
         var DOMAddress = $('<p>').text(address);
