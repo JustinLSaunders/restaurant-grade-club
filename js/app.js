@@ -21,54 +21,83 @@ $("button").on("click", function() {
   var userBorough = $("#borough").val();
   var baseURL = "https://data.cityofnewyork.us/resource/xx67-kt59.json";
   var appToken = "CkMdPHTRlkUB2u1ixJnSUW3Ve";
-  var queryString = "?$q=" + userInput + "&boro=" + userBorough + "&$where=grade%20IS%20NOT%20NULL%20&$order=camis DESC, grade_date DESC"; //!+ "&$$app_token=" + appToken
+  var queryString = "?$q=" + userInput + "&boro=" + userBorough + "&$where=grade%20IS%20NOT%20NULL%20&$order=camis DESC, grade_date DESC" + "&$$app_token=" + appToken;
 
   $.getJSON(baseURL + queryString, function(data) {
 
     console.log(data);
     var arraySize = data.length;
-    violationDataFilter();
+    dataFilter();
 
     if (arraySize == 0) {
       console.log("Please check your spelling.");
     }
 
-    function violationDataFilter  (){
+    function dataFilter  (){
       for (var i = 0; i < arraySize; i++){
+        var returnedInfo = $('<div>').attr({'id': 'returned-info'});
+        var infoDisplay = $('<div>').attr({'class': 'info-display row', 'id': 'info-display' + i});
+        var certificateDisplay = $('<div>').attr({'class': 'certificate-display col-xs-2 col-sm-2', 'id': 'certificate-display' + i});
+        var detailsContainer = $('<div>').attr({'class': 'details-container col-xs-10 col-sm-10', 'id': 'details-container' + i});
+        var dbaDisplay = $('<div>').attr({'class': 'dba-display col-xs-12', 'id': 'dba-display' + i});
+        var addressDisplay = $('<div>').attr({'class': 'address-display col-xs-12', 'id': 'address-display' + i})
+        var violationInfo = $('<p>').attr({'id': 'violation' + i});
+
         var restaurantName = data[i].dba;
+        var DOMDba = $('<h2>').text(restaurantName);
         var restaurantId = data[i].camis;
+        var violationsDisplay = $('<div>').attr({'class': 'violations-display col-xs-12', 'id': 'violations-display' + restaurantId});
         var grade = data[i].grade;
+        var DOMCert = $('<img>').attr('src', './img/' + grade + '.png');
         var gradeDate = data[i].grade_date;
         var gradeDateParsed = Date.parse(gradeDate);
-        var violationDescription = data[i].violation_description;
+        var typoViolationText = data[i].violation_description;
+
+        var violationDescription = typoViolationText.replaceAll(" Âº", "Âº");
+        violationDescription = violationDescription.replaceAll("Âº ", "Âº");
+        violationDescription = violationDescription.replaceAll("Âº", "°");
+        violationDescription = violationDescription.replaceAll("", "'");
+
         var address = (data[i].building + " " + data[i].street + " " + data[i].boro + " " + data[i].zipcode);
+        var DOMAddress = $('<p>').text(address);
 
         if (i == 0) {
           var latestGradeDate = gradeDate;
-          console.log(i + " " + restaurantName);
-          console.log(restaurantId);
-          console.log(grade);
-          console.log(gradeDate);
-          console.log(gradeDateParsed);
-          console.log(address);
-          console.log(violationDescription);
+          $('#results-container').append(returnedInfo);
+          $('#returned-info').append(infoDisplay);
+          $('#info-display' + i).append(certificateDisplay)
+          $('#certificate-display' + i).append(DOMCert);
+          $('#info-display' + i).append(detailsContainer);
+          $('#details-container' + i).append(dbaDisplay);
+          $('#dba-display' + i).append(DOMDba);
+          $('#details-container' + i).append(addressDisplay);
+          $('#address-display' + i).append(DOMAddress);
+          $('#details-container' + i).append(violationsDisplay);
+          $('#violations-display' + restaurantId).append(violationInfo);
+          $('#violation' + i).text(violationDescription);
         };
 
         if (i !== 0) {
           var previousRestaurantId = data[i - 1].camis;
           var previousGradeDate = data[i - 1].grade_date;
           var previousGradeDateParsed = Date.parse(previousGradeDate);
+          var previous
           if (restaurantId == previousRestaurantId && gradeDate == latestGradeDate) {
-            console.log(violationDescription);
+              $('#violations-display' + restaurantId).append(violationInfo);
+              $('#violation' + i).text(violationDescription);
           } else if (restaurantId != previousRestaurantId){
             latestGradeDate = gradeDate;
-            console.log(i + " " + restaurantName);
-            console.log(restaurantId);
-            console.log(grade);
-            console.log(gradeDate);
-            console.log(gradeDateParsed);
-            console.log(address);
-            console.log(violationDescription); 
+            $('#returned-info').append(infoDisplay);
+            $('#info-display' + i).append(certificateDisplay)
+            $('#certificate-display' + i).append(DOMCert);
+            $('#info-display' + i).append(detailsContainer);
+            $('#details-container' + i).append(dbaDisplay);
+            $('#dba-display' + i).append(DOMDba);
+            $('#details-container' + i).append(addressDisplay);
+            $('#address-display' + i).append(DOMAddress);
+            $('#details-container' + i).append(violationsDisplay);
+            $('#violations-display' + restaurantId).append(violationInfo);
+            $('#violation' + i).text(violationDescription);
           }
         }
       }
