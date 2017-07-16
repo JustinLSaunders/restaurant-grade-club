@@ -66,10 +66,14 @@ $("button").on("click", function() {
         //   $(this).text(text);
         // });
 
-        // violationDescription = violationDescription.replaceAll(" Âº", "Âº");
-        // violationDescription = violationDescription.replaceAll("Âº ", "Âº");
-        // violationDescription = violationDescription.replaceAll("Âº", "°");
-        // violationDescription = violationDescription.replaceAll("", "'");
+        if (violationDescription != null){
+          violationDescription = violationDescription.replaceAll(" Âº", "Âº");
+          violationDescription = violationDescription.replaceAll("Âº ", "Âº");
+          violationDescription = violationDescription.replaceAll("Âº", "°");
+          violationDescription = violationDescription.replaceAll("", "'");
+        } else {
+          violationDescription = "Woah! No violations!"
+        };
 
         var address = (data[i].building + " " + data[i].street + " " + data[i].boro + " " + data[i].zipcode);
         var DOMAddress = $('<p>').text(address);
