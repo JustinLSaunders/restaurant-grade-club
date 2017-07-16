@@ -32,7 +32,7 @@ $("button").on("click", function() {
 
       $('#results-container').append(returnedInfo);
 
-      $('#returned-info').append('<p class="error-message">' + "I COULDN'T FIND THAT RESTAURANT<br>PLEASE DOUBLE-CHECK THE NAME OR BOROUGH</p>");
+      $('#returned-info').append('<p class="error-message">' + "I COULDN'T FIND THAT RESTAURANT.<br>PLEASE DOUBLE-CHECK THE NAME OR BOROUGH.</p>");
     } else {dataFilter()}
 
     function dataFilter  (){
