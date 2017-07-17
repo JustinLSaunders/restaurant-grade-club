@@ -22,6 +22,7 @@ $("#search-btn").on("click", function() {
   clearOldItems(resultsContainer, "returned-info");
 
   $('#loader').toggle();
+
   var userInput = $("input").val();
   var userBorough = $("#borough").val();
   var baseURL = "https://data.cityofnewyork.us/resource/xx67-kt59.json";
@@ -40,7 +41,7 @@ $("#search-btn").on("click", function() {
       $('#returned-info').append('<p class="error-message">' + "I COULDN'T FIND THAT RESTAURANT.<br>PLEASE DOUBLE-CHECK THE NAME OR BOROUGH.</p>");
     } else {dataFilter()}
 
-    function dataFilter  (){
+    function dataFilter() {
       for (var i = 0; i < arraySize; i++){
         var returnedInfo = $('<div>').attr({'id': 'returned-info'});
         var infoDisplay = $('<div>').attr({'class': 'info-display row', 'id': 'info-display' + i});
@@ -49,43 +50,20 @@ $("#search-btn").on("click", function() {
         var dbaDisplay = $('<div>').attr({'class': 'dba-display col-xs-12', 'id': 'dba-display' + i});
         var addressDisplay = $('<div>').attr({'class': 'address-display col-xs-12', 'id': 'address-display' + i})
         var violationInfo = $('<p>').attr({'id': 'violation' + i});
-
         var restaurantName = data[i].dba;
         restaurantName = restaurantName.replaceAll("/", " / ");
         var DOMDba = $('<h2>').text(restaurantName);
         var restaurantId = data[i].camis;
         var violationsDisplay = $('<div>').attr({'class': 'violations-display col-xs-12', 'id': 'violations-display' + restaurantId});
         var grade = data[i].grade;
-        
-        if ((grade === "Z") || (grade ===  "P")){
-          var altTag = "NYC Sanitation Grade Pending"
-        } else {
-          var altTag = "NYC Sanitation Grade " + grade
-        };
-
         var DOMCert = $('<img class="certificate">').attr({'src': './img/' + grade + '.png', 'alt': altTag});
-
         var gradeDate = data[i].grade_date;
         var gradeDateParsed = Date.parse(gradeDate);
         var violationDescription = data[i].violation_description;
-
-        if (violationDescription != null){
-          violationDescription = violationDescription.replaceAll(" Âº", "Âº");
-          violationDescription = violationDescription.replaceAll("Âº ", "Âº");
-          violationDescription = violationDescription.replaceAll("Âº", "°");
-          violationDescription = violationDescription.replaceAll("", "'");
-          violationDescription = violationDescription.replaceAll("''''", "'");
-
-        } else {
-          violationDescription = "Woah! No violations!"
-        };
-
         var address = (data[i].building + " " + data[i].street + " " + data[i].boro + " " + data[i].zipcode);
         var DOMAddress = $('<p>').text(address);
-
-        if (i == 0) {
-          var latestGradeDate = gradeDate;
-          $('#results-container').append(returnedInfo);
+        
+        function DOMPaint(){
           $('#returned-info').append(infoDisplay);
           $('#info-display' + i).append(certificateDisplay)
           $('#certificate-display' + i).append(DOMCert);
@@ -99,6 +77,29 @@ $("#search-btn").on("click", function() {
           $('#violation' + i).text(violationDescription);
         };
 
+        if ((grade === "Z") || (grade ===  "P")){
+          var altTag = "NYC Sanitation Grade Pending"
+        } else {
+          var altTag = "NYC Sanitation Grade " + grade
+        };
+
+        // DOH data has a lot of odd characters in their violation descriptions. This resolves those into client-readable characters.
+        if (violationDescription != null){
+          violationDescription = violationDescription.replaceAll(" Âº", "Âº");
+          violationDescription = violationDescription.replaceAll("Âº ", "Âº");
+          violationDescription = violationDescription.replaceAll("Âº", "°");
+          violationDescription = violationDescription.replaceAll("", "'");
+          violationDescription = violationDescription.replaceAll("''''", "'");
+        } else {
+          violationDescription = "Woah! No violations!"
+        };
+
+        if (i == 0) {
+          var latestGradeDate = gradeDate;
+          $('#results-container').append(returnedInfo);
+          DOMPaint();
+        };
+
         if (i !== 0) {
           var previousRestaurantId = data[i - 1].camis;
           var previousGradeDate = data[i - 1].grade_date;
@@ -109,17 +110,7 @@ $("#search-btn").on("click", function() {
               $('#violation' + i).text(violationDescription);
           } else if (restaurantId != previousRestaurantId){
             latestGradeDate = gradeDate;
-            $('#returned-info').append(infoDisplay);
-            $('#info-display' + i).append(certificateDisplay)
-            $('#certificate-display' + i).append(DOMCert);
-            $('#info-display' + i).append(detailsContainer);
-            $('#details-container' + i).append(dbaDisplay);
-            $('#dba-display' + i).append(DOMDba);
-            $('#details-container' + i).append(addressDisplay);
-            $('#address-display' + i).append(DOMAddress);
-            $('#details-container' + i).append(violationsDisplay);
-            $('#violations-display' + restaurantId).append(violationInfo);
-            $('#violation' + i).text(violationDescription);
+            DOMPaint();
           }
         }
       }
