@@ -121,9 +121,18 @@ footer{
   font-size: 1.5rem;
 }
 
-div#loader{
-  display: none;
-  color: #df0000;
-  font-weight: bold;
-  padding: 8px 2%;
+#loading {
+    display: none;
+    margin: 8px auto;
+    border: 10px solid #df0000;
+    border-top: 10px solid #D5E7F2;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 1.25s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

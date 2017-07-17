@@ -21,7 +21,7 @@ $("#search-btn").on("click", function() {
 
   clearOldItems(resultsContainer, "returned-info");
 
-  $('#loader').toggle();
+  $('#loading').toggle();
 
   var userInput = $("input").val();
   var userBorough = $("#borough").val();
@@ -115,6 +115,6 @@ $("#search-btn").on("click", function() {
         }
       }
     }
-    $('#loader').toggle();
+    $('#loading').toggle();
   });
 });
