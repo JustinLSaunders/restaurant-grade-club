@@ -57,6 +57,13 @@ $("#search-btn").on("click", function() {
         var restaurantId = data[i].camis;
         var violationsDisplay = $('<div>').attr({'class': 'violations-display col-xs-12', 'id': 'violations-display' + restaurantId});
         var grade = data[i].grade;
+
+        if ((grade === "Z") || (grade ===  "P")){
+          var altTag = "NYC Sanitation Grade Pending"
+        } else {
+          var altTag = "NYC Sanitation Grade " + grade
+        };
+
         var DOMCert = $('<img class="certificate">').attr({'src': './img/' + grade + '.png', 'alt': altTag});
         var gradeDate = data[i].grade_date;
         var gradeDateParsed = Date.parse(gradeDate);
@@ -76,12 +83,6 @@ $("#search-btn").on("click", function() {
           $('#details-container' + i).append(violationsDisplay);
           $('#violations-display' + restaurantId).append(violationInfo);
           $('#violation' + i).text(violationDescription);
-        };
-
-        if ((grade === "Z") || (grade ===  "P")){
-          var altTag = "NYC Sanitation Grade Pending"
-        } else {
-          var altTag = "NYC Sanitation Grade " + grade
         };
 
         // DOH data has a lot of odd characters in their violation descriptions. This resolves those into client-readable characters.
