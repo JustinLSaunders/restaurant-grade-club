@@ -4,7 +4,8 @@ String.prototype.replaceAll = function(str1, str2, ignore){
 
 $("#user-input").keyup(function(event){
     if(event.keyCode == 13){
-        $("#search-btn").click();
+      this.blur();
+      $("#search-btn").click();
     }
 });
 
