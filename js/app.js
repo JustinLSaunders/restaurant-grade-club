@@ -32,7 +32,7 @@ $("#search-btn").on("click", function() {
 
     var arraySize = data.length;
 
-    if ((arraySize == 0) || (userInput.includes(";"))) {
+    if ((arraySize == 0) || (userInput.includes(";")) || (userInput === "")) {
       var returnedInfo = $('<div>').attr({'id': 'returned-info'});
 
       $('#results-container').append(returnedInfo);
@@ -51,6 +51,7 @@ $("#search-btn").on("click", function() {
         var violationInfo = $('<p>').attr({'id': 'violation' + i});
 
         var restaurantName = data[i].dba;
+        restaurantName = restaurantName.replaceAll("/", " / ");
         var DOMDba = $('<h2>').text(restaurantName);
         var restaurantId = data[i].camis;
         var violationsDisplay = $('<div>').attr({'class': 'violations-display col-xs-12', 'id': 'violations-display' + restaurantId});
