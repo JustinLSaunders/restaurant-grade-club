@@ -46,16 +46,16 @@ $("#search-btn").on("click", function() {
       for (var i = 0; i < arraySize; i++){
         var returnedInfo = $('<div>').attr({'id': 'returned-info'});
         var infoDisplay = $('<div>').attr({'class': 'info-display row', 'id': 'info-display' + i});
-        var certificateDisplay = $('<div>').attr({'class': 'certificate-display col-xs-2 col-sm-2', 'id': 'certificate-display' + i});
-        var detailsContainer = $('<div>').attr({'class': 'details-container col-xs-10 col-sm-10', 'id': 'details-container' + i});
-        var dbaDisplay = $('<div>').attr({'class': 'dba-display col-xs-12', 'id': 'dba-display' + i});
-        var addressDisplay = $('<div>').attr({'class': 'address-display col-xs-12', 'id': 'address-display' + i})
+        var dbaDisplay = $('<div>').attr({'class': 'dba-display', 'id': 'dba-display' + i});
+        var addressDisplay = $('<div>').attr({'class': 'address-display', 'id': 'address-display' + i})
+        var certificateDisplay = $('<div>').attr({'class': 'certificate-display col-xs-2 col-xs-pull-10', 'id': 'certificate-display' + i});
+        var detailsContainer = $('<div>').attr({'class': 'details-container col-xs-10 col-xs-push-2', 'id': 'details-container' + i});
         var violationInfo = $('<p>').attr({'id': 'violation' + i});
         var restaurantName = data[i].dba;
         restaurantName = restaurantName.replaceAll("/", " / ");
         var DOMDba = $('<h2>').text(restaurantName);
         var restaurantId = data[i].camis;
-        var violationsDisplay = $('<div>').attr({'class': 'violations-display col-xs-12', 'id': 'violations-display' + restaurantId});
+        var violationsDisplay = $('<div>').attr({'class': 'violations-display', 'id': 'violations-display' + restaurantId});
         var grade = data[i].grade;
 
         if ((grade === "Z") || (grade ===  "P")){
@@ -73,13 +73,13 @@ $("#search-btn").on("click", function() {
         
         function DOMPaint(){
           $('#returned-info').append(infoDisplay);
-          $('#info-display' + i).append(certificateDisplay)
-          $('#certificate-display' + i).append(DOMCert);
           $('#info-display' + i).append(detailsContainer);
           $('#details-container' + i).append(dbaDisplay);
           $('#dba-display' + i).append(DOMDba);
           $('#details-container' + i).append(addressDisplay);
           $('#address-display' + i).append(DOMAddress);
+          $('#info-display' + i).append(certificateDisplay)
+          $('#certificate-display' + i).append(DOMCert);
           $('#details-container' + i).append(violationsDisplay);
           $('#violations-display' + restaurantId).append(violationInfo);
           $('#violation' + i).text(violationDescription);
