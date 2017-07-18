@@ -27,8 +27,14 @@ $("#search-btn").on("click", function() {
   var userInput = $("input").val();
   var userBorough = $("#borough").val();
   var baseURL = "https://data.cityofnewyork.us/resource/xx67-kt59.json";
-  var appToken = "CkMdPHTRlkUB2u1ixJnSUW3Ve";
-  var queryString = "?$$app_token=" + appToken + "&$q=" + userInput + "&boro=" + userBorough + "&$where=grade%20IS%20NOT%20NULL%20&$order=camis DESC, grade_date DESC";
+  var NYCToken = "CkMdPHTRlkUB2u1ixJnSUW3Ve";
+  var queryString = "?$$app_token=" + NYCToken + "&$q=" + userInput + "&boro=" + userBorough + "&$where=grade%20IS%20NOT%20NULL%20&$order=camis DESC, grade_date DESC";
+
+// For future Google Maps integration
+  // var googleQuery = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=" + googleAPIKey;
+
+  // var googleAPIKey = "AIzaSyCkT_MpiCk_-b4rn_gNGplZsc8gUKawVaM";
+
 
   $.getJSON(baseURL + queryString, function(data) {
 
