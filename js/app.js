@@ -16,7 +16,7 @@ $("#search-btn").on("click", function() {
     var oldResults = document.getElementById(childElem);
     if (oldResults != null) {
       var oldChild = document.getElementById(childElem);
-      resultsContainer.removeChild(oldChild)
+      parentElem.removeChild(oldChild)
     };
   };
 
