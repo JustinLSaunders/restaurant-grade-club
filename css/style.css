@@ -1,6 +1,6 @@
 body{
   font-family: 'Archivo Narrow', sans-serif;
-  font-size: 1.75em;
+  font-size: 1.25em;
   background: #D5E7F2;
 }
 .tool-container{
@@ -30,7 +30,7 @@ h1{
   padding: .5em 0;
   font-family: 'Shrikhand', cursive;
   font-weight: 400;
-  font-size: 3.75rem;
+  font-size: 2rem;
   text-shadow: 2px 2px #000;
   margin: 0;
 }
