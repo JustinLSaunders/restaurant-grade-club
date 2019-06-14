@@ -52,18 +52,27 @@ function queryNycDoh(offset){
     $(data).each(function(){
         var refinedQueryString = "?&camis='" + this.camis + "'&inspection_date='" + this.MAX_inspection_date + "'&$order=camis ASC";
         $.getJSON(baseURL + refinedQueryString, function(result){
-            console.log(result[0].camis);
-            console.log(result[0].dba);
-            var name = "<h2>" + result[0].dba + "</h2>";
-
-            console.log(result[0].building + " " + result[0].street + ", " + result[0].boro + " " + result[0].zipcode);
-            var address = "<p>" + result[0].building + " " + result[0].street + ", " + result[0].boro + " " + result[0].zipcode + "</p>";
             console.log(result[0].grade);
-            var grade = '<div class="certificate-display col-xs-2"><img class="certificate" src="./img/' + result[0].grade + '.png"></div>';
-            $('#results-container').append([grade, name, address]);
+            console.log(result[0].dba);
+            console.log(result[0].camis);
+            console.log(result[0].building + " " + result[0].street + ", " + result[0].boro + " " + result[0].zipcode);
+            if (result[0].grade == undefined) {
+                var certificateCard = "Z";
+            } else { certificateCard = result[0].grade;}
+
+            var grade = '<div class="certificate-display col-xs-2"><img class="certificate" src="./img/' + certificateCard + '.png"></div>';
+            var name = "<h2>" + result[0].dba.replaceAll("/", " / ").replaceAll("Â¢", "¢") + "</h2>";
+            var address = "<p>" + result[0].building + " " + result[0].street + ", " + result[0].boro + " " + result[0].zipcode + "</p>";
+            $('#results-container').append('<div id="'+result[0].camis+ '" class="info-display row"></div>');
+            $('#results-container > div:last-child').append(grade).append("<div class='details-container col-xs-10'></div>");
+            $('#results-container > div:last-child > .details-container').append([name, address]).append("<ul>");
+
             $(result).each(function(){
-                var violation = "<li>" + this.violation_description + "</li>";
-                $('#results-container').append(violation);
+                if (this.violation_description !== undefined){
+                    violationClean = this.violation_description.replaceAll(" Âº", "Âº").replaceAll("Âº ", "Âº").replaceAll("Âº", "°").replaceAll("", "'").replaceAll("''''", "'")
+                } else {violationClean = "No violation description listed"}
+                var violation = "<li>" + violationClean + "</li>";
+                $('#results-container > div:last-child > .details-container > ul').append(violation);
             });
         });
     });
