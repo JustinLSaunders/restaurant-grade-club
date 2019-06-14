@@ -8,10 +8,15 @@ $("#user-input").keyup(function(event){
       $("#search-btn").click();
     }
 });
-
+offsetValue = 0;
 $("#search-btn").on("click", function() {
-  queryDoh(0);
-
+  offsetValue = 0;
+  queryDoh(offsetValue);
+});
+$("#next").on("click", function() {
+    offsetValue = offsetValue + 5;
+    console.log("---------- next! ----------");
+    queryDoh(offsetValue);
 });
 function queryDoh(offset){
   var resultsContainer = document.getElementById("results-container");
@@ -31,27 +36,31 @@ function queryDoh(offset){
   var userInput = $("input").val().toUpperCase();
   var userBorough = $("#borough").val();
   var baseURL = "https://data.cityofnewyork.us/resource/43nn-pn8j.json";
-  var NYCToken = "CkMdPHTRlkUB2u1ixJnSUW3Ve";
   var queryString = "?$where=dba like '%25" + userInput + "%25'";
   //var queryString = "?$$app_token=" + NYCToken + "&$q=" + userInput + "&boro=" + userBorough + "&$where=grade%20IS%20NOT%20NULL%20&$order=camis DESC, grade_date DESC";
-  var testQueryString = "?$where=dba like '%25" + userInput + "%25'&$select=camis,MAX(inspection_date)&$group=camis&$limit=10&$offset=0";
-
+  var testQueryString = "?$where=upper(dba) like '%25" + userInput + "%25'&$select=camis,MAX(inspection_date)&$group=camis&$limit=5&$offset=" + offset;
   $.getJSON(baseURL + testQueryString, function(data) {
     console.log(data);
-    var refinedQueryString = "?&camis='" + data[0].camis + "'&inspection_date='" + data[0].MAX_inspection_date + "'";
-      $.getJSON(baseURL + refinedQueryString, function(result){
-        $(result).each(function(){
-          console.log(this.violation_description);
+    $(data).each(function(){
+        var refinedQueryString = "?&camis='" + this.camis + "'&inspection_date='" + this.MAX_inspection_date + "'";
+        $.getJSON(baseURL + refinedQueryString, function(result){
+            console.log(result);
+            console.log(result[0].dba);
+            console.log(result[0].building + " " + result[0].street + ", " + result[0].boro + " " + result[0].zipcode);
+            console.log(result[0].grade);
+            $(result).each(function(){
+                console.log(this.violation_code + ": " + this.violation_description);
+            });
         });
-        console.log(result);
-      });
+    });
+
   });
 
-  if (userBorough !== ""){
-      queryString = queryString + "&boro=" + userBorough;
-  }
-  var sortParams = "&$order=dba ASC, inspection_date DESC";
-  queryString = queryString + sortParams;
+  // if (userBorough !== ""){
+  //     queryString = queryString + "&boro=" + userBorough;
+  // }
+  // var sortParams = "&$order=dba ASC, inspection_date DESC";
+  // queryString = queryString + sortParams;
 
   //https://data.cityofnewyork.us/resource/43nn-pn8j.json?$where=dba%20like%20%27%BURGER%25%27&$select=camis,MAX(inspection_date)&$group=camis
   //https://data.cityofnewyork.us/resource/43nn-pn8j.json?$where=dba%20like%20%27%SANFORD%25%27%26inspection_date=2018-08-23T00:00:00.000
@@ -59,7 +68,7 @@ function queryDoh(offset){
   // For future Google Maps integration
   // var googleQuery = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=" + googleAPIKey;
 
-  // var googleAPIKey = "AIzaSyCkT_MpiCk_-b4rn_gNGplZsc8gUKawVaM";
+
   // $.getJSON(baseURL + queryString, function(data) {
   //   console.log(data);
   //     var arraySize = data.length;
