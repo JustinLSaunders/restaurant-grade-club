@@ -59,12 +59,18 @@ input#user-input{
   padding: 1px 4px;
 }
 
-button#search-btn{
+button#search-btn, button#more-btn{
+  width: 96%;
   font-family: 'Archivo Narrow', sans-serif;
   font-size: 2rem;
   font-weight: bold;
   height: 40px;
   margin: 0 2%;
+}
+
+button#more-btn{
+  display: none;
+  margin: .5em auto;
 }
 
 #loading {
@@ -84,7 +90,11 @@ button#search-btn{
 }
 
 #results-container{
+  max-height: calc(77vh + 2px);
+  overflow-x: hidden;
+  overflow-y: scroll;
   border-top: 3px solid #df0000;
+  border-bottom: 3px solid #df0000;
   display: none;
 }
 
@@ -150,7 +160,7 @@ footer{
   font-size: 1.5rem;
 }
 
-.navigation{
-  display: flow-root;
-  padding: 0 2%;
-}
+/*.navigation{*/
+  /*display: flow-root;*/
+  /*padding: 0 2%;*/
+/*}*/

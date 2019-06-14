@@ -11,11 +11,22 @@ $("#user-input").keyup(function(event){
 
 offsetValue = 0;
 $("#search-btn").on("click", function() {
-  offsetValue = 0;
+    $('#results-container').empty();
+    offsetValue = 0;
   queryNycDoh(offsetValue);
-  $('#results-container').toggle();
+  $('#results-container, #more-btn').css('display', 'block');
 });
-$("#next-btn").on("click", function() {
+$(window).on("scroll", function() {
+    var scrollHeight = $(document).height();
+    console.log(scrollHeight);
+    var scrollPosition = $(window).height() + $(window).scrollTop();
+    if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+        offsetValue = offsetValue + 5;
+        console.log("---------- next ----------" + offsetValue);
+        queryNycDoh(offsetValue);
+    }
+});
+$("#more-btn").on("click", function() {
     offsetValue = offsetValue + 5;
     console.log("---------- next ----------" + offsetValue);
     queryNycDoh(offsetValue);
@@ -44,7 +55,7 @@ function queryNycDoh(offset){
   var userInput = $("input").val().toUpperCase();
   var userBorough = $("#borough").val();
   var baseURL = "https://data.cityofnewyork.us/resource/43nn-pn8j.json";
-  var queryString = "?$where=dba like '%25" + userInput + "%25'";
+  //var queryString = "?$where=dba like '%25" + userInput + "%25'";
   //var queryString = "?$$app_token=" + NYCToken + "&$q=" + userInput + "&boro=" + userBorough + "&$where=grade%20IS%20NOT%20NULL%20&$order=camis DESC, grade_date DESC";
   var testQueryString = "?$where=upper(dba) like '%25" + userInput + "%25'&$order=camis ASC &$select=camis,MAX(inspection_date)&$group=camis&$limit=5&$offset=" + offset;
   $.getJSON(baseURL + testQueryString, function(data, jqXHR) {
@@ -62,7 +73,7 @@ function queryNycDoh(offset){
 
             var grade = '<div class="certificate-display col-xs-2"><img class="certificate" src="./img/' + certificateCard + '.png"></div>';
             var name = "<h2>" + result[0].dba.replaceAll("/", " / ").replaceAll("Â¢", "¢") + "</h2>";
-            var address = "<p>" + result[0].building + " " + result[0].street + ", " + result[0].boro + " " + result[0].zipcode + "</p>";
+            var address = "<p>" + result[0].building + " " + result[0].street + ", " + result[0].boro + "</p>";
             $('#results-container').append('<div id="'+result[0].camis+ '" class="info-display row"></div>');
             $('#results-container > div:last-child').append(grade).append("<div class='details-container col-xs-10'></div>");
             $('#results-container > div:last-child > .details-container').append([name, address]).append("<ul>");
@@ -77,10 +88,6 @@ function queryNycDoh(offset){
         });
     });
     $('#loading').toggle();
-    console.log(listHtml);
-    $(listHtml).each(function(){
-      console.log("listHtml " + this.rname);
-    });
   });
 
   // if (userBorough !== ""){
