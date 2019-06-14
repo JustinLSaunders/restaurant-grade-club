@@ -8,10 +8,12 @@ $("#user-input").keyup(function(event){
       $("#search-btn").click();
     }
 });
+
 offsetValue = 0;
 $("#search-btn").on("click", function() {
   offsetValue = 0;
   queryNycDoh(offsetValue);
+  $('#results-container').toggle();
 });
 $("#next-btn").on("click", function() {
     offsetValue = offsetValue + 5;
@@ -24,6 +26,7 @@ $("#previous-btn").on("click", function() {
     queryNycDoh(offsetValue);
 });
 function queryNycDoh(offset){
+  var listHtml = [];
   var resultsContainer = document.getElementById("results-container");
 
   function clearOldItems(parentElem, childElem){
@@ -47,25 +50,28 @@ function queryNycDoh(offset){
   $.getJSON(baseURL + testQueryString, function(data, jqXHR) {
     console.log(data);
     $(data).each(function(){
-        var refinedQueryString = "?&camis='" + this.camis + "'&inspection_date='" + this.MAX_inspection_date + "'";
+        var refinedQueryString = "?&camis='" + this.camis + "'&inspection_date='" + this.MAX_inspection_date + "'&$order=camis ASC";
         $.getJSON(baseURL + refinedQueryString, function(result){
-            //console.log(result);
+            console.log(result[0].camis);
             console.log(result[0].dba);
+            var name = "<h2>" + result[0].dba + "</h2>";
+
             console.log(result[0].building + " " + result[0].street + ", " + result[0].boro + " " + result[0].zipcode);
+            var address = "<p>" + result[0].building + " " + result[0].street + ", " + result[0].boro + " " + result[0].zipcode + "</p>";
             console.log(result[0].grade);
+            var grade = '<div class="certificate-display col-xs-2"><img class="certificate" src="./img/' + result[0].grade + '.png"></div>';
+            $('#results-container').append([grade, name, address]);
             $(result).each(function(){
-                console.log(this.violation_code + ": " + this.violation_description);
+                var violation = "<li>" + this.violation_description + "</li>";
+                $('#results-container').append(violation);
             });
         });
     });
     $('#loading').toggle();
-
-  }).fail(function(jqXHR) {
-      if (jqXHR.status == 404) {
-          alert("404 Not Found");
-      } else {
-          alert("Other non-handled error type");
-      }
+    console.log(listHtml);
+    $(listHtml).each(function(){
+      console.log("listHtml " + this.rname);
+    });
   });
 
   // if (userBorough !== ""){

@@ -83,6 +83,7 @@ button#search-btn{
 
 #results-container{
   border-top: 3px solid #df0000;
+  display: none;
 }
 
 .error-message {
@@ -135,4 +136,9 @@ footer{
   padding: 4px;
   font-weight: bold;
   font-size: 1.5rem;
+}
+
+.navigation{
+  display: flow-root;
+  padding: 0 2%;
 }
