@@ -11,14 +11,19 @@ $("#user-input").keyup(function(event){
 offsetValue = 0;
 $("#search-btn").on("click", function() {
   offsetValue = 0;
-  queryDoh(offsetValue);
+  queryNycDoh(offsetValue);
 });
-$("#next").on("click", function() {
+$("#next-btn").on("click", function() {
     offsetValue = offsetValue + 5;
-    console.log("---------- next! ----------");
-    queryDoh(offsetValue);
+    console.log("---------- next ----------" + offsetValue);
+    queryNycDoh(offsetValue);
 });
-function queryDoh(offset){
+$("#previous-btn").on("click", function() {
+    offsetValue = offsetValue - 5;
+    console.log("---------- previous ----------" + offsetValue);
+    queryNycDoh(offsetValue);
+});
+function queryNycDoh(offset){
   var resultsContainer = document.getElementById("results-container");
 
   function clearOldItems(parentElem, childElem){
@@ -38,13 +43,13 @@ function queryDoh(offset){
   var baseURL = "https://data.cityofnewyork.us/resource/43nn-pn8j.json";
   var queryString = "?$where=dba like '%25" + userInput + "%25'";
   //var queryString = "?$$app_token=" + NYCToken + "&$q=" + userInput + "&boro=" + userBorough + "&$where=grade%20IS%20NOT%20NULL%20&$order=camis DESC, grade_date DESC";
-  var testQueryString = "?$where=upper(dba) like '%25" + userInput + "%25'&$select=camis,MAX(inspection_date)&$group=camis&$limit=5&$offset=" + offset;
-  $.getJSON(baseURL + testQueryString, function(data) {
+  var testQueryString = "?$where=upper(dba) like '%25" + userInput + "%25'&$order=camis ASC &$select=camis,MAX(inspection_date)&$group=camis&$limit=5&$offset=" + offset;
+  $.getJSON(baseURL + testQueryString, function(data, jqXHR) {
     console.log(data);
     $(data).each(function(){
         var refinedQueryString = "?&camis='" + this.camis + "'&inspection_date='" + this.MAX_inspection_date + "'";
         $.getJSON(baseURL + refinedQueryString, function(result){
-            console.log(result);
+            //console.log(result);
             console.log(result[0].dba);
             console.log(result[0].building + " " + result[0].street + ", " + result[0].boro + " " + result[0].zipcode);
             console.log(result[0].grade);
@@ -53,7 +58,14 @@ function queryDoh(offset){
             });
         });
     });
+    $('#loading').toggle();
 
+  }).fail(function(jqXHR) {
+      if (jqXHR.status == 404) {
+          alert("404 Not Found");
+      } else {
+          alert("Other non-handled error type");
+      }
   });
 
   // if (userBorough !== ""){
