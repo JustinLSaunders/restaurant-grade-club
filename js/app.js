@@ -24,11 +24,12 @@ $("#search-btn").on("click", function() {
 
   $('#loading').toggle();
 
-  var userInput = $("input").val();
+  var userInput = $("input").val().toUpperCase();
   var userBorough = $("#borough").val();
-  var baseURL = "https://data.cityofnewyork.us/resource/xx67-kt59.json";
+  var baseURL = "https://data.cityofnewyork.us/resource/43nn-pn8j.json";
   var NYCToken = "CkMdPHTRlkUB2u1ixJnSUW3Ve";
-  var queryString = "?$$app_token=" + NYCToken + "&$q=" + userInput + "&boro=" + userBorough + "&$where=grade%20IS%20NOT%20NULL%20&$order=camis DESC, grade_date DESC";
+  var queryString = "?$where=dba like '%25" + userInput + "%25'&$order=dba ASC, inspection_date DESC";
+  //var queryString = "?$$app_token=" + NYCToken + "&$q=" + userInput + "&boro=" + userBorough + "&$where=grade%20IS%20NOT%20NULL%20&$order=camis DESC, grade_date DESC";
 
 // For future Google Maps integration
   // var googleQuery = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=" + googleAPIKey;
