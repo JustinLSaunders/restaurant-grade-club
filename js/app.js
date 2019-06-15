@@ -27,6 +27,9 @@ function runSearch () {
     $('#results-container, #more-btn').css('display', 'block');
     scrollLoad('#results-container');
     appResize();
+    setTimeout(inputBlur, 750);
+}
+function inputBlur(){
     $input.blur();
 }
 function appResize (){
