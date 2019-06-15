@@ -27,6 +27,7 @@ function runSearch () {
     $('#results-container, #more-btn').css('display', 'block');
     scrollLoad('#results-container');
     appResize();
+    $input.blur();
 }
 function appResize (){
     var totalHeight = $('.tool-container').innerHeight();
