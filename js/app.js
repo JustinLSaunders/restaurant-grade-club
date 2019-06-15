@@ -60,7 +60,7 @@ function queryNycDoh(offset){
       if (((arraySize == 0) || (userInput.includes(";")) || (userInput === "")) && offsetValue == 0) {
           var returnedInfo = $('<div class="info-display">');
           $('#results-container').append(returnedInfo);
-          $('#results-container > div:last-child').append('<p class="error-message">' + "OUR ROBOTS COULDN'T FIND THAT RESTAURANT.<br>PLEASE DOUBLE-CHECK THE NAME.</p>");
+          $('#results-container > div:last-child').append('<p class="error-message">OUR ROBOTS CANNOT FIND THAT RESTAURANT.</p><p class="error-message">PLEASE DOUBLE-CHECK THE NAME.</p>');
       } else if ((offsetValue !== 0) && (arraySize == 0)){
           console.log("nothing here");
       } else if (arraySize !== 0){
