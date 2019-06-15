@@ -27,7 +27,10 @@ function runSearch () {
     $('#results-container, #more-btn').css('display', 'block');
     scrollLoad('#results-container');
     appResize();
-    setTimeout(inputBlur, 750);
+    setTimeout(function(){
+        inputBlur();
+        loadingAnimationToggle();
+    }, 200);
 }
 function inputBlur(){
     $input.blur();
@@ -50,15 +53,19 @@ function scrollLoad(elem){
         if ($(elem).scrollTop() + resultHeight >= $(elem)[0].scrollHeight) {
             offsetValue = offsetValue + 5;
             queryNycDoh(offsetValue);
+            setTimeout(loadingAnimationToggle, 200);
         }
     });
 }
+function loadingAnimationToggle(){
+    $('#loading').toggleClass("active");
+}
 function queryNycDoh(offset){
+  loadingAnimationToggle();
   var userInput = $("input").val().toUpperCase();
   var baseURL = "https://data.cityofnewyork.us/resource/43nn-pn8j.json";
   var testQueryString = "?$where=upper(dba) like '%25" + userInput + "%25'&$order=camis ASC &$select=camis,MAX(inspection_date)&$group=camis&$limit=5&$offset=" + offset;
   $.getJSON(baseURL + testQueryString, function(data) {
-      $('#loading').toggle();
       var arraySize = data.length;
       if (((arraySize == 0) || (userInput.includes(";")) || (userInput === "")) && offsetValue == 0) {
           var returnedInfo = $('<div class="info-display">');
@@ -78,7 +85,6 @@ function queryNycDoh(offset){
                       certificateCard = result[0].grade;
                       certificateTitle = "NYC Sanitation Grade " + certificateCard;
                   }
-
                   var grade = '<div class="certificate-display"><div class="certificate '+ certificateCard +'" " title="' + certificateTitle + '"></div></div>';
                   var name = '<h2>' + result[0].dba.replaceAll("/", " / ").replaceAll("Â¢", "¢") + '</h2>';
                   var address = '<p class="address-display">' + result[0].building + ' ' + result[0].street + ', ' + result[0].boro + '</p>';

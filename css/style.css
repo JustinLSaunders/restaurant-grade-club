@@ -3,6 +3,30 @@ body{
   font-size: 1.25em;
   background: #D5E7F2;
 }
+#loading {
+    transition: opacity .5s ease-out;
+    opacity: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: none;
+    margin: 8px auto;
+    border: 4px solid #df0000;
+    border-top: 4px solid #D5E7F2;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1.25s linear infinite;
+}
+#loading.active{
+    transition: opacity .5s ease-out;
+    opacity: 1;
+    display: block;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 .tool-container{
   display: block;
   margin: 0;
@@ -34,9 +58,7 @@ h1{
   text-shadow: 2px 2px #000;
   margin: 0;
 }
-#h1-spacing{
-  letter-spacing: 4px;  
-}
+#h1-spacing{letter-spacing: 4px;}
 h2{margin: 0;}
 #input-area{
   border-bottom: solid 3px #df0000;
@@ -82,9 +104,7 @@ input#user-input{
   padding: 0;
   list-style: none;
 }
-.details-container > ul > li{
-  margin: .5em 0;
-}
+.details-container > ul > li{margin: .5em 0;}
 .certificate {
   width: calc(100% - 1rem);;
   padding: 0 1rem .5em 0;
