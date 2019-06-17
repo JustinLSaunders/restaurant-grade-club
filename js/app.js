@@ -1,8 +1,10 @@
 String.prototype.replaceAll = function(str1, str2, ignore){
   return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
 };
+var offsetValue = 0;
+//user is "finished typing," do something
 var typingTimer;                //timer identifier
-var doneTypingInterval = 750;  //time in ms, 5 second for example
+var doneTypingInterval = 1250;  //time in ms, 5 second for example
 var $input = $('#user-input');
 //on keyup, start the countdown
 $input.on('keyup', function () {
@@ -13,13 +15,15 @@ $input.on('keyup', function () {
 $input.on('keydown', function () {
     clearTimeout(typingTimer);
 });
-//user is "finished typing," do something
 function doneTyping () {
     if ($('#user-input')[0].value.length !== 0){
+        offsetValue = 0;
         runSearch();
     }
 }
-offsetValue = 0;
+$('button.clear').on('click', function(){
+    $($input).val("").focus();
+});
 function runSearch () {
     offsetValue = 0;
     $('#results-container').empty();
@@ -30,7 +34,7 @@ function runSearch () {
     setTimeout(function(){
         inputBlur();
         loadingAnimationToggle();
-    }, 200);
+    }, 500);
 }
 function inputBlur(){
     $input.blur();
@@ -50,10 +54,10 @@ function scrollLoad(elem){
     var resultHeight = 0;
     $(elem).bind('scroll', function() {
         resultHeight = $(elem).innerHeight() + 15;
-        if ($(elem).scrollTop() + resultHeight >= $(elem)[0].scrollHeight) {
+        if ($(elem).scrollTop() + resultHeight >= $(elem)[0].scrollHeight && $('#user-input')[0].value.length !== 0) {
             offsetValue = offsetValue + 5;
             queryNycDoh(offsetValue);
-            setTimeout(loadingAnimationToggle, 200);
+            setTimeout(loadingAnimationToggle, 500);
         }
     });
 }
@@ -73,6 +77,7 @@ function queryNycDoh(offset){
           $('#results-container > div:last-child').append('<p class="error-message">OUR ROBOTS CANNOT FIND THAT RESTAURANT.</p><p class="error-message">PLEASE DOUBLE-CHECK THE NAME.</p>');
       } else if ((offsetValue !== 0) && (arraySize == 0)){
           console.log("nothing here");
+          offsetValue == 0;
       } else if (arraySize !== 0){
           $(data).each(function(){
               var refinedQueryString = "?&camis='" + this.camis + "'&inspection_date='" + this.MAX_inspection_date + "'&$order=camis ASC";
@@ -85,13 +90,12 @@ function queryNycDoh(offset){
                       certificateCard = result[0].grade;
                       certificateTitle = "NYC Sanitation Grade " + certificateCard;
                   }
-                  var grade = '<div class="certificate-display"><div class="certificate '+ certificateCard +'" " title="' + certificateTitle + '"></div></div>';
                   var name = '<h2>' + result[0].dba.replaceAll("/", " / ").replaceAll("Â¢", "¢") + '</h2>';
+                  var grade = '<div class="certificate-display"><div class="certificate '+ certificateCard +'" " title="' + certificateTitle + '"></div></div>';
                   var address = '<p class="address-display">' + result[0].building + ' ' + result[0].street + ', ' + result[0].boro + '</p>';
                   $('#results-container').append('<div id="'+result[0].camis+ '" class="info-display"></div>');
-                  $('#results-container > div:last-child').append(grade).append('<div class="details-container"></div>');
-                  $('#results-container > div:last-child > .details-container').append([name, address]).append('<ul>');
-
+                  $('#results-container > div:last-child').append('<div class="details-container"></div>');
+                  $('#results-container > div:last-child > .details-container').append([name, grade, address]).append('<ul>');
                   $(result).each(function(){
                       if (this.violation_description !== undefined){
                           violationClean = this.violation_description.replaceAll(" Âº", "Âº").replaceAll("Âº ", "Âº").replaceAll("Âº", "°").replaceAll("", "'").replaceAll("''''", "'")
