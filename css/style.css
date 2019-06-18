@@ -94,7 +94,8 @@ button.clear{
     padding: 0 5px;
     top: calc(50% - 13px);
     color: #D5E7F2;
-    background-color: darkgray;
+    background-color: #666;
+    border: none;
 }
 #results-container{
   background: #fff;
