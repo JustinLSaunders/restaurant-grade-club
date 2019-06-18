@@ -45,10 +45,10 @@ function inputBlur(){
 }
 function appResize (){
     var totalHeight = $('.tool-container').innerHeight();
-    var inputHeight = $('#input-area').outerHeight();
     var headerHeight = $('header').outerHeight();
+    var inputHeight = $('#input-area').outerHeight();
     var footerHeight = $('footer').outerHeight();
-    var resultsHeight = totalHeight - inputHeight - headerHeight - footerHeight - 9;
+    var resultsHeight = totalHeight - inputHeight - headerHeight - footerHeight;
     $('#results-container').css('max-height', Math.floor(resultsHeight));
 }
 $(window).on('resize', function(){
