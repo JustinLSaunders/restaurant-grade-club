@@ -17,12 +17,12 @@ $input.on('keydown', function () {
 });
 function doneTyping () {
     if ($('#user-input')[0].value.length !== 0){
-        offsetValue = 0;
         runSearch();
     }
 }
 $('button.clear').on('click', function(){
     $($input).val("").focus();
+    $('#results-container').empty();
 });
 function runSearch () {
     offsetValue = 0;
@@ -53,7 +53,7 @@ $(window).on('resize', function(){
 function scrollLoad(elem){
     var resultHeight = 0;
     $(elem).bind('scroll', function() {
-        resultHeight = $(elem).innerHeight() + 15;
+        resultHeight = $(elem).innerHeight() + 3;
         if ($(elem).scrollTop() + resultHeight >= $(elem)[0].scrollHeight && $('#user-input')[0].value.length !== 0) {
             offsetValue = offsetValue + 5;
             queryNycDoh(offsetValue);
@@ -68,7 +68,7 @@ function queryNycDoh(offset){
   loadingAnimationToggle();
   var userInput = $("input").val().toUpperCase();
   var baseURL = "https://data.cityofnewyork.us/resource/43nn-pn8j.json";
-  var testQueryString = "?$where=upper(dba) like '%25" + userInput + "%25'&$order=camis ASC &$select=camis,MAX(inspection_date)&$group=camis&$limit=5&$offset=" + offset;
+  var testQueryString = '?$where=upper(dba) like "%25' + userInput + '%25"&$order=camis ASC &$select=camis,MAX(inspection_date)&$group=camis&$limit=5&$offset=' + offset;
   $.getJSON(baseURL + testQueryString, function(data) {
       var arraySize = data.length;
       if (((arraySize == 0) || (userInput.includes(";")) || (userInput === "")) && offsetValue == 0) {
@@ -76,7 +76,6 @@ function queryNycDoh(offset){
           $('#results-container').append(returnedInfo);
           $('#results-container > div:last-child').append('<p class="error-message">OUR ROBOTS CANNOT FIND THAT RESTAURANT.</p><p class="error-message">PLEASE DOUBLE-CHECK THE NAME.</p>');
       } else if ((offsetValue !== 0) && (arraySize == 0)){
-          console.log("nothing here");
           offsetValue == 0;
       } else if (arraySize !== 0){
           $(data).each(function(){
