@@ -51,6 +51,7 @@ $(window).on('resize', function(){
     appResize();
 });
 function scrollLoad(elem){
+  if ($('#no-results').length = 0){
     var resultHeight = 0;
     $(elem).bind('scroll', function() {
         resultHeight = $(elem).innerHeight() + 3;
@@ -60,6 +61,7 @@ function scrollLoad(elem){
             setTimeout(loadingAnimationToggle, 500);
         }
     });
+  }
 }
 function loadingAnimationToggle(){
     $('#loading').toggleClass("active");
