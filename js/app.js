@@ -51,7 +51,6 @@ $(window).on('resize', function(){
     appResize();
 });
 function scrollLoad(elem){
-  if ($('#no-results').length == 0){
     var resultHeight = 0;
     $(elem).bind('scroll', function() {
         resultHeight = $(elem).innerHeight() + 3;
@@ -61,7 +60,6 @@ function scrollLoad(elem){
             setTimeout(loadingAnimationToggle, 500);
         }
     });
-  }
 }
 function loadingAnimationToggle(){
     $('#loading').toggleClass("active");
@@ -79,7 +77,6 @@ function queryNycDoh(offset){
           $('#results-container > div:last-child').append('<p class="error-message">OUR ROBOTS CANNOT FIND THAT RESTAURANT.</p><p class="error-message">PLEASE DOUBLE-CHECK THE NAME.</p>');
       } else if ((offsetValue !== 0) && (arraySize == 0)){
           offsetValue == 0;
-          $('#results-container').append('<div id="no-results"></div>');
       } else if (arraySize !== 0){
           $(data).each(function(){
               var refinedQueryString = "?&camis='" + this.camis + "'&inspection_date='" + this.MAX_inspection_date + "'&$order=camis ASC";
