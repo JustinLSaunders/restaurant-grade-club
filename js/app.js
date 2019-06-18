@@ -72,12 +72,26 @@ function loadingAnimationToggle(){
         $('#loading').removeClass("active")},
         500);
 }
+function searchNyc(){
+    $.ajax({
+        url: "https://data.cityofnewyork.us/resource/43nn-pn8j.json",
+        type: "GET",
+        data: {
+            "$limit" : 15,
+            "$$app_token" : "CkMdPHTRlkUB2u1ixJnSUW3Ve"
+        }
+    }).done(function(data) {
+        // alert("Retrieved " + data.length + " records from the dataset!");
+        console.log(data);
+    });
+}
+
 function queryNycDoh(offset){
     if(endOfResults === 0){
       loadingAnimationToggle();
       var userInput = $("input").val().toUpperCase();
       var baseURL = "https://data.cityofnewyork.us/resource/43nn-pn8j.json";
-      var testQueryString = '?$where=upper(dba) like "%25' + userInput + '%25"&$order=camis ASC &$select=camis,MAX(inspection_date)&$group=camis&$limit=5&$offset=' + offset;
+      var testQueryString = '?$where=upper(dba) like "%25' + userInput + '%25"&$order=camis ASC &$select=camis,MAX(inspection_date)&$group=camis&$limit=5&$offset=' + offset + '&$$app_token=CkMdPHTRlkUB2u1ixJnSUW3Ve';
       $.getJSON(baseURL + testQueryString, function(data) {
           var arraySize = data.length;
           if (((arraySize === 0) || (userInput.includes(";")) || (userInput === "")) && offsetValue === 0) {
