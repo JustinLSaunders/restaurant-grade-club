@@ -173,7 +173,7 @@ function geoCode(addressString){
         dataType: "json",
         data: {
             "address": addressString,
-            "key": "YOUR_KEY"
+            "key": API_KEY
         }
     }).done(function (data) {
         console.log(data);
