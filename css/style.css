@@ -90,28 +90,26 @@ input#user-input{
     border: none;
     left: 0;
 }
-
 button.clear{
     position: relative;
     float: right;
     display: inline-block;
-    width: 25px;
-    height: 25px;
-    overflow: hidden;
-    background: #666666;
+    width: 26px;
+    height: 26px;
+    background-color: #666666;
     border-radius: 50%;
-    border: 5px solid #666666;
+    border: 2px solid #666666;
+    padding: 0;
     top: calc(50% - 13px);
 }
 button.clear::before, button.clear::after{
-    height: 3px;
-    margin-top: -2px;
-    border-radius: 5px;
+    height: 2px;
+    border-radius: 3px;
     content: '';
     position: absolute;
-    width: 100%;
-    top: 50%;
-    left: 0;
+    width: 74%;
+    top: calc(50% - 1px);
+    left: calc(50% - 8px);
     background: #D5E7F2;
 }
 button.clear::before{

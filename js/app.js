@@ -105,7 +105,7 @@ function searchNyc(offset){
             // }
         }).done(function (data) {
             var arraySize = data.length;
-            if (((arraySize === 0) || (userInput.includes(";")) || (userInput === "")) && offsetValue === 0) {
+            if (((arraySize === 0) || (userInput.includes(";")) || (userInput === "")) && offsetValue === 0 && $resultsContainer[0].children.length === 0) {
                 var returnedInfo = $('<div class="info-display">');
                 $($resultsContainer).append(returnedInfo);
                 $($resultsContainer).children('div:last-child').append('<p class="error-message">OUR ROBOTS CANNOT FIND THAT RESTAURANT.</p><p class="error-message">PLEASE DOUBLE-CHECK THE NAME.</p>');
