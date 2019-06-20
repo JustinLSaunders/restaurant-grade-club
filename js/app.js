@@ -140,7 +140,7 @@ function refineDohResults(data) {
 function buildResults(result) {
     var addressString = result[0].building + ' ' + result[0].street + ', ' + result[0].boro + " " + result[0].zipcode;
     // console.log(result[0]);
-    geoCode(addressString);
+    // geoCode(addressString);
     if (result[0].grade === undefined || result[0].grade === "Not Yet Graded") {
         var certificateCard = "Z";
         var certificateTitle = "NYC Sanitation Grade Pending";
@@ -173,7 +173,7 @@ function geoCode(addressString){
         dataType: "json",
         data: {
             "address": addressString,
-            "key": "API_KEY"
+            "key": API_KEY
         }
     }).done(function (data) {
         console.log(data);
