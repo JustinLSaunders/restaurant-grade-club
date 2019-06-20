@@ -1,5 +1,6 @@
 html{height:100%;}
 body{
+    user-select:none;
     font-family: 'Archivo Narrow', sans-serif;
     font-size: 1.25em;
     background: #D5E7F2;

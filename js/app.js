@@ -137,7 +137,10 @@ function refineDohResults(data) {
     });
 }
 
-function buildResults(result){
+function buildResults(result) {
+    var addressString = result[0].building + ' ' + result[0].street + ', ' + result[0].boro + " " + result[0].zipcode;
+    // console.log(result[0]);
+    // geoCode(addressString);
     if (result[0].grade === undefined || result[0].grade === "Not Yet Graded") {
         var certificateCard = "Z";
         var certificateTitle = "NYC Sanitation Grade Pending";
@@ -147,7 +150,7 @@ function buildResults(result){
     }
     var name = '<h2>' + result[0].dba.replaceAll("/", " / ").replaceAll("Â¢", "¢") + '</h2>';
     var grade = '<div class="certificate-display"><div class="certificate '+ certificateCard +'" " title="' + certificateTitle + '"></div></div>';
-    var address = '<p class="address-display">' + result[0].building + ' ' + result[0].street + ', ' + result[0].boro + " " + result[0].zipcode + '</p>';
+    var address = '<p class="address-display">' + addressString + '</p>';
     $($resultsContainer).append('<div id="'+result[0].camis+ '" class="info-display"></div>');
     $($resultsContainer).children('div:last-child').append('<div class="details-container"></div>');
     $($resultsContainer).children('div:last-child').children('.details-container').append([name, grade, address]).append('<ul>');
@@ -162,6 +165,32 @@ function buildResults(result){
         }
         $($resultsContainer).children('div:last-child').children('.details-container').children('ul').append(violation);
     });
+}
+function geoCode(addressString){
+    $.ajax({
+        url: "https://maps.googleapis.com/maps/api/geocode/json?",
+        type: "GET",
+        dataType: "json",
+        data: {
+            "address": addressString,
+            "key": "AIzaSyCkT_MpiCk_-b4rn_gNGplZsc8gUKawVaM"
+        }
+    }).done(function (data) {
+        console.log(data);
+        // console.log(data.results[0].geometry.location);
+    });
+}
+function initMap(){
+    console.log("hi");
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            console.log(pos);
+        });
+    }
 }
 
 // function queryNycDoh(offset){
