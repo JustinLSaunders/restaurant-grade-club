@@ -13,7 +13,6 @@
   <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow:400,400i,700,700i&amp;subset=latin-ext" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=initMap"></script>-->
   <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
@@ -27,6 +26,9 @@
       <input type="text" id="user-input" value="" aria-label="restaurant name" placeholder="RESTAURANT NAME">
       <button class="clear"></button>
     </section>
+    <form id="location-request">
+      <input id="location-specific" type="checkbox" name="location" value="location">NEARBY
+    </form>
     <div id="results-container">
     </div>
     <footer>&copy; 2019 Justin Saunders</footer>

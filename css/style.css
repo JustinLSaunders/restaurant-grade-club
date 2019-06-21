@@ -127,6 +127,10 @@ button.clear::after{
     -o-transform: rotate(-45deg);
     transform: rotate(-45deg);
 }
+form#location-request{
+    background-color: #df0000;
+    color: #FFFFFF;
+}
 #results-container{
     background: #fff;
     overflow-x: hidden;
