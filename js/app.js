@@ -79,7 +79,7 @@ function loadingAnimationToggle(){
 
 var baseUrl = "https://data.cityofnewyork.us/resource/";
 var endpoint = "43nn-pn8j.json?";
-var appToken = "CkMdPHTRlkUB2u1ixJnSUW3Ve";
+var appToken = APP_TOKEN;
 function searchNyc(offset){
     if(endOfResults === 0) {
         loadingAnimationToggle();
@@ -91,7 +91,7 @@ function searchNyc(offset){
             data: {
                 "$limit": 5,
                 "$offset": offset,
-                "$$app_token": appToken,
+                //"$$app_token": appToken,
                 "$where": 'upper(dba) like"%' + userInput + '%"',
                 "$order": "camis ASC",
                 "$select": "camis,MAX(inspection_date)",
