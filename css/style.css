@@ -66,6 +66,7 @@ h1{
 }
 #h1-spacing{letter-spacing: 4px;}
 h2{
+    user-select: text;
     margin: 0;
     float: left;
     width: 85%;
@@ -195,6 +196,7 @@ button.clear::after{
     min-width: 75px;
 }
 .address-display{
+    user-select: text;
     clear: left;
     margin: 0 0 .75em;
 }
