@@ -1,6 +1,9 @@
 html{height:100%;}
 body{
     user-select:none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
     font-family: 'Archivo Narrow', sans-serif;
     font-size: 1.25em;
     background: #D5E7F2;
@@ -66,7 +69,6 @@ h1{
 }
 #h1-spacing{letter-spacing: 4px;}
 h2{
-    user-select: text;
     margin: 0;
     float: left;
     width: 85%;
@@ -196,9 +198,14 @@ button.clear::after{
     min-width: 75px;
 }
 .address-display{
-    user-select: text;
     clear: left;
     margin: 0 0 .75em;
+}
+h2, .address-display{
+    user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    -webkit-user-select: text;
 }
 footer{
     border-bottom-right-radius: 8px;
