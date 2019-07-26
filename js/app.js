@@ -141,6 +141,7 @@ function buildResults(result) {
     var addressString = result[0].building + ' ' + result[0].street + ', ' + result[0].boro + " " + result[0].zipcode;
     // console.log(result[0]);
     // geoCode(addressString);
+    addressString = addressString.toUpperCase();
     if (result[0].grade === undefined || result[0].grade === "Not Yet Graded") {
         var certificateCard = "Z";
         var certificateTitle = "NYC Sanitation Grade Pending";
