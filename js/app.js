@@ -158,7 +158,7 @@ function buildResults(result) {
         if (this.violation_description !== undefined){
             violationClean = this.violation_description.replaceAll(" Âº", "Âº").replaceAll("Âº ", "Âº").replaceAll("Âº", "°").replaceAll("", "'").replaceAll("''''", "'")
         } else {violationClean = "No violation description listed"}
-        if (this.critical_flag == "Critical"){
+        if (this.critical_flag == "Y"){
             var violation = '<li class="critical">' + violationClean + '</li>';
         } else{
             var violation = "<li>" + violationClean + "</li>";
