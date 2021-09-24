@@ -129,7 +129,7 @@ function refineDohResults(data) {
             data: {
                 "camis": this.camis,
                 "inspection_date": this.MAX_inspection_date,
-                "$select": "camis,grade,dba,building,street,boro,zipcode,violation_description,critical_flag,action",
+                "$select": "camis,grade,dba,building,street,boro,zipcode,violation_description,critical_flag",
                 "$order": "dba ASC"
             },
             success: function(data, status, jqxhr){
@@ -171,7 +171,7 @@ function buildResults(result) {
         if (this.violation_description !== undefined){
             violationClean = this.violation_description.replaceAll(" Âº", "Âº").replaceAll("Âº ", "Âº").replaceAll("Âº", "°").replaceAll("", "'").replaceAll("''''", "'")
         } else {violationClean = "No violation description listed"}
-        if (this.critical_flag === "Y"){
+        if (this.critical_flag === "Critical"){
             var violation = '<li class="critical">' + violationClean + '</li>';
         } else{
             var violation = "<li>" + violationClean + "</li>";
@@ -185,7 +185,8 @@ function geoCode(address, callback){
         type: "GET",
         dataType: "json",
         data: {
-            "address": address
+            "address": address,
+            "key": API_KEY
         },
         success: callback
     });
