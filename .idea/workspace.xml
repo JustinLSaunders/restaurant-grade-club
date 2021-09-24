@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="43ca9073-d19b-4e19-9b88-97f0a0ac7291" name="Default" comment="Added &quot;testing&quot; directory for experimental app.js">
-      <change afterPath="$PROJECT_DIR$/testing/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/app.js" afterDir="false" />
-    </list>
+    <list default="true" id="43ca9073-d19b-4e19-9b88-97f0a0ac7291" name="Default" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -121,6 +117,7 @@
       <workItem from="1612795122306" duration="293000" />
       <workItem from="1612813522148" duration="257000" />
       <workItem from="1612827355135" duration="137000" />
+      <workItem from="1632491605908" duration="560000" />
     </task>
     <task id="LOCAL-00001" summary="added aria label to input">
       <created>1503593964893</created>
@@ -325,7 +322,14 @@
       <option name="project" value="LOCAL" />
       <updated>1561081419416</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Added &quot;testing&quot; directory for experimental app.js">
+      <created>1632491669204</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1632491669204</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -349,12 +353,6 @@
     <MESSAGE value="Restricting user select in CSS&#10;Adding experiments with Google maps geocoding" />
     <MESSAGE value="Added &quot;testing&quot; directory for experimental app.js" />
     <option name="LAST_COMMIT_MESSAGE" value="Added &quot;testing&quot; directory for experimental app.js" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="683" y="450" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592316398659">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state x="683" y="450" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1920.1057@0.23.1920.1057" timestamp="1592316398659" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
