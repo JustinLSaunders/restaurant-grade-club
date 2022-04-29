@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="43ca9073-d19b-4e19-9b88-97f0a0ac7291" name="Default" comment="Restricting user select in CSS&#10;Adding experiments with Google maps geocoding">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/restaurant-grade.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Restaurant Grade.iml" afterDir="false" />
+    <list default="true" id="43ca9073-d19b-4e19-9b88-97f0a0ac7291" name="Default" comment="updated copyright date">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/project.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/project.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,6 +130,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="HTML" />
     <property name="node.js.detected.package.prettier" value="true" />
     <property name="node.js.path.for.package.prettier" value="project" />
     <property name="node.js.selected.package.prettier" value="" />
@@ -177,7 +176,11 @@
       <workItem from="1560981974752" duration="26990000" />
       <workItem from="1561044823281" duration="11889000" />
       <workItem from="1632492341122" duration="628000" />
-      <workItem from="1632493060456" duration="1245000" />
+      <workItem from="1632493060456" duration="2392000" />
+      <workItem from="1632497361111" duration="12547000" />
+      <workItem from="1632747149033" duration="617000" />
+      <workItem from="1632758316614" duration="2000" />
+      <workItem from="1633453012944" duration="2209000" />
     </task>
     <task id="LOCAL-00001" summary="added aria label to input">
       <created>1503593964893</created>
@@ -361,7 +364,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632492464003</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="updated copyright date">
+      <created>1632494868319</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1632494868319</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -421,7 +431,8 @@
     <MESSAGE value="violation list bullet style" />
     <MESSAGE value="dropped club from project name" />
     <MESSAGE value="Restricting user select in CSS&#10;Adding experiments with Google maps geocoding" />
-    <option name="LAST_COMMIT_MESSAGE" value="Restricting user select in CSS&#10;Adding experiments with Google maps geocoding" />
+    <MESSAGE value="updated copyright date" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated copyright date" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/index.html">

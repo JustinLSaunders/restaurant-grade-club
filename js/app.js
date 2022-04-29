@@ -79,7 +79,7 @@ function loadingAnimationToggle(){
 
 var baseUrl = "https://data.cityofnewyork.us/resource/";
 var endpoint = "43nn-pn8j.json?";
-var appToken = APP_TOKEN;
+var appToken = "CkMdPHTRlkUB2u1ixJnSUW3Ve";
 function searchNyc(offset){
     if(endOfResults === 0) {
         loadingAnimationToggle();
@@ -91,7 +91,7 @@ function searchNyc(offset){
             data: {
                 "$limit": 5,
                 "$offset": offset,
-                //"$$app_token": appToken,
+                "$$app_token": appToken,
                 "$where": 'upper(dba) like"%' + userInput + '%"',
                 "$order": "camis ASC",
                 "$select": "camis,MAX(inspection_date)",
@@ -129,7 +129,7 @@ function refineDohResults(data) {
                 "camis": this.camis,
                 "inspection_date": this.MAX_inspection_date,
                 "$order": "camis ASC",
-                "$select": "camis,grade,dba,building,street,boro,zipcode,violation_description,critical_flag"
+                "$select": "camis,grade,dba,action,building,street,boro,zipcode,violation_description,critical_flag"
             }
         }).done(function(data) {
             buildResults(data);
@@ -138,28 +138,48 @@ function refineDohResults(data) {
 }
 
 function buildResults(result) {
-    var addressString = result[0].building + ' ' + result[0].street + ', ' + result[0].boro + " " + result[0].zipcode;
+    var name = result[0].dba;
+    var camis = result[0].camis;
+    console.log(name);
+    console.log(camis);
+    var building = result[0].building;
+    var street = result[0].street;
+    var boro = result[0].boro;
+    var zipCode = result[0].zipcode;
+    var grade = result[0].grade;
+    var action = result[0].action;
+    var addressString = building + ' ' + street + ', ' + boro + " " + zipCode;
     // console.log(result[0]);
     // geoCode(addressString);
     addressString = addressString.toUpperCase();
-    if (result[0].grade === undefined || result[0].grade === "Not Yet Graded") {
-        var certificateCard = "Z";
+    console.log(grade)
+    console.log(action)
+    const regex = new RegExp('Closed');
+    var closeCheck = regex.test(action);
+    if (closeCheck){
+        var certificateCard = "Closed";
+        var certificateTitle = "Closed by Health Department";
+    } else if (grade === undefined ||grade === "Z" || grade === "Grade Pending") {
+        var certificateCard = "GP";
         var certificateTitle = "NYC Sanitation Grade Pending";
+    } else if (grade ==="N"){
+      var certificateCard = "NG";
+      var certificateTitle = "Not Yet Graded"
     } else {
-        certificateCard = result[0].grade;
-        certificateTitle = "NYC Sanitation Grade " + certificateCard;
+        certificateCard = grade;
+        certificateTitle = "NYC Sanitation Grade " + grade;
     }
-    var name = '<h2>' + result[0].dba.replaceAll("/", " / ").replaceAll("Â¢", "¢") + '</h2>';
-    var grade = '<div class="certificate-display"><div class="certificate '+ certificateCard +'" " title="' + certificateTitle + '"></div></div>';
-    var address = '<p class="address-display">' + addressString + '</p>';
-    $($resultsContainer).append('<div id="'+result[0].camis+ '" class="info-display"></div>');
+    var nameElem = '<h2>' + name.replaceAll("/", " / ").replaceAll("Â¢", "¢") + '</h2>';
+    var gradeElem = '<div class="certificate-display"><img src="img/NYCRestaurant_'+certificateCard+'.svg" alt="'+certificateTitle+'"></div>';
+    var addressElem = '<p class="address-display">' + addressString + '</p>';
+    $($resultsContainer).append('<div id="'+camis+ '" class="info-display"></div>');
     $($resultsContainer).children('div:last-child').append('<div class="details-container"></div>');
-    $($resultsContainer).children('div:last-child').children('.details-container').append([name, grade, address]).append('<ul>');
+    $($resultsContainer).children('div:last-child').children('.details-container').append([nameElem, gradeElem, addressElem]).append('<ul>');
     $(result).each(function(){
         if (this.violation_description !== undefined){
             violationClean = this.violation_description.replaceAll(" Âº", "Âº").replaceAll("Âº ", "Âº").replaceAll("Âº", "°").replaceAll("", "'").replaceAll("''''", "'")
         } else {violationClean = "No violation description listed"}
-        if (this.critical_flag == "Y"){
+        if (this.critical_flag === "Critical"){
             var violation = '<li class="critical">' + violationClean + '</li>';
         } else{
             var violation = "<li>" + violationClean + "</li>";
